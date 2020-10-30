@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Application.BankTransactions.Commands.CreateBankTransaction
+namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {
     public class CreateBankTransactionCommand : IRequest<int>
     {

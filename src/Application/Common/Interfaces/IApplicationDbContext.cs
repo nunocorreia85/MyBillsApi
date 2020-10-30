@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Domain.Entities;
 
-namespace Application.Common.Interfaces
+namespace MyBills.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
