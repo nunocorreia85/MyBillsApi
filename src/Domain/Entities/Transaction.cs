@@ -11,16 +11,17 @@ namespace MyBills.Domain.Entities
         public decimal Amount { get; set; }
         public int CategoryId { get; set; }
         public int AccountId { get; set; }
-        private readonly bool _deleted;
+        private bool _deleted;
         public bool Deleted
         {
             get => _deleted;
             set
             {
                 if (value == true && _deleted == false)
-                {
-                    DomainEvents.Add(new TransactionDeletedEvent(this));
+                {                    
+                    DomainEvents.Add(new TransactionDeletedEvent(this));                    
                 }
+                _deleted = value;
             }
         }
 
