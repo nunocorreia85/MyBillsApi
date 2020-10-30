@@ -3,13 +3,13 @@ using MyBills.Domain.Entities;
 
 namespace MyBills.Domain.Events
 {
-    internal class TransactionDeletedEvent : DomainEvent
+    internal class BankTransactionDeletedEvent : DomainEvent
     {
-        private readonly Transaction transaction;
+        private readonly BankTransaction _bankTransaction;
 
-        public TransactionDeletedEvent(Transaction transaction)
+        public BankTransactionDeletedEvent(BankTransaction bankTransaction)
         {
-            this.transaction = transaction;
+            _bankTransaction = bankTransaction;
         }
     }
 }

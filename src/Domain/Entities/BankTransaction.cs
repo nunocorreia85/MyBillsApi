@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MyBills.Domain.Entities
 {
-    public class Transaction : AuditableEntity, IHasDomainEvent
+    public class BankTransaction : AuditableEntity, IHasDomainEvent
     {
         public int Id { get; set; }
         public string Memo { get; set; }
@@ -19,7 +19,7 @@ namespace MyBills.Domain.Entities
             {
                 if (value == true && _deleted == false)
                 {                    
-                    DomainEvents.Add(new TransactionDeletedEvent(this));                    
+                    DomainEvents.Add(new BankTransactionDeletedEvent(this));                    
                 }
                 _deleted = value;
             }
