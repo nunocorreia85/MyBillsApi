@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using MyBills.Application.Common.Interfaces;
 
 namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {
@@ -14,7 +15,14 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
     }
 
     public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, int>
-    {        
+    {
+               public IApplicationDbContext ApplicationDbContext { get; set; }
+        public CreateBankTransactionCommandHandler(IApplicationDbContext applicationDbContext)
+        {
+            this.ApplicationDbContext = applicationDbContext;
+
+        }
+ 
         public Task<int> Handle(CreateBankTransactionCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(1);
