@@ -6,11 +6,10 @@ namespace MyBills.Domain.Entities
 {
     public class BankTransaction : AuditableEntity, IHasDomainEvent
     {
-        public int Id { get; set; }
         public string Memo { get; set; }
         public decimal Amount { get; set; }
-        public int CategoryId { get; set; }
-        public int AccountId { get; set; }
+        public string CategoryId { get; set; }
+        public string AccountId { get; set; }
         private bool _deleted;
         public bool Deleted
         {
@@ -18,8 +17,8 @@ namespace MyBills.Domain.Entities
             set
             {
                 if (value == true && _deleted == false)
-                {                    
-                    DomainEvents.Add(new BankTransactionDeletedEvent(this));                    
+                {
+                    DomainEvents.Add(new BankTransactionDeletedEvent(this));
                 }
                 _deleted = value;
             }

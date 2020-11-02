@@ -1,13 +1,13 @@
-﻿using MyBills.Domain.Common;
+using MyBills.Domain.Common;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Domain.Events
 {
-    internal class BankTransactionDeletedEvent : DomainEvent
+    public class BankTransactionCreatedEvent : DomainEvent
     {
         private readonly BankTransaction _bankTransaction;
 
-        public BankTransactionDeletedEvent(BankTransaction bankTransaction)
+        public BankTransactionCreatedEvent(BankTransaction bankTransaction)
         {
             _bankTransaction = bankTransaction;
         }
