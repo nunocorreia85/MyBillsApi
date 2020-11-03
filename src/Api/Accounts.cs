@@ -22,23 +22,23 @@ namespace MyBills.Api
             _mediator = mediator;
         }
 
-        //[FunctionName("CreateAccount")]
-        //public async Task<IActionResult> Run(
-        //    [HttpTrigger(AuthorizationLevel.Function, "post", Route = "accounts")] HttpRequest req,
-        //    ILogger log)
-        //{
-        //    log.LogInformation("Creating a new account");
+        [FunctionName("CreateAccount")]
+        public async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "accounts")] HttpRequest req,
+            ILogger log)
+        {
+            log.LogInformation("Creating a new account");
 
-        //    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
-        //    var input = JsonConvert.DeserializeObject<CreateAccountCommand>(requestBody);
+            var input = JsonConvert.DeserializeObject<CreateAccountCommand>(requestBody);
 
-        //    string id = await _mediator.Send(input);
+            string id = await _mediator.Send(input);
 
-        //    log.LogInformation("This HTTP triggered function executed successfully.");
+            log.LogInformation("This HTTP triggered function executed successfully.");
 
-        //    return new OkObjectResult(id);
-        //}
+            return new OkObjectResult(id);
+        }
 
         [FunctionName("CreateAccount")]
         public async Task<IActionResult> Run(
