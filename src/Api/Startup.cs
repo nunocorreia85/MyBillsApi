@@ -11,11 +11,11 @@ namespace MyBills.Api
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddApplication();
-            builder.Services.AddInfrastructure();   
+            builder.Services.AddInfrastructure();
         }
 
         public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
-        {            
+        {
             base.ConfigureAppConfiguration(builder);
         }
     }

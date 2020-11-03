@@ -10,7 +10,9 @@ namespace MyBills.Domain.Entities
         public decimal Amount { get; set; }
         public string CategoryId { get; set; }
         public string AccountId { get; set; }
+
         private bool _deleted;
+
         public bool Deleted
         {
             get => _deleted;

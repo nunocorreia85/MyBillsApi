@@ -18,7 +18,7 @@ namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransaction
 
         public async Task<Unit> Handle(DeleteBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.BankTransactions.FindAsync(request.Id);
+            BankTransaction entity = await _context.BankTransactions.FindAsync(request.Id);
 
             if (entity == null)
             {

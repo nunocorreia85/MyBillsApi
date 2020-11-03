@@ -1,12 +1,11 @@
-﻿using MyBills.Domain.Common;
+﻿using MediatR;
 
-namespace MyBills.Domain.Entities
+namespace MyBills.Application.Accounts.Commands.CreateAccount
 {
-    public class Account : AuditableEntity
+    public class CreateAccountCommand : IRequest<string>
     {
         public string OwnerName { get; set; }
         public decimal Balance { get; set; }
         public string BankAccountNumber { get; set; }
-        public bool Closed { get; set; }
     }
 }

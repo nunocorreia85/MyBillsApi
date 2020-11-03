@@ -17,7 +17,7 @@ namespace MyBills.Application.BankTransactions.Commands.UpdateBankTransaction
         }
         public async Task<Unit> Handle(UpdateBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.BankTransactions.FindAsync(request.Id);
+            BankTransaction entity = await _context.BankTransactions.FindAsync(request.Id);
 
             if (entity == null)
             {

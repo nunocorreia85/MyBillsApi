@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Common;
 using MyBills.Domain.Entities;
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -53,13 +54,22 @@ namespace MyBills.Infrastructure.Persistence
 
             return result;
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            string cosmosEndpoint = Environment.GetEnvironmentVariable("CosmosDb_Endpoint");
+            string cosmosKey = Environment.GetEnvironmentVariable("CosmosDb_Key");
+            string cosmosDbName = Environment.GetEnvironmentVariable("CosmosDb_DbName");
+
+            optionsBuilder.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDbName);
+
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.HasDefaultContainer("MyBillsContainer");
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
@@ -67,12 +77,12 @@ namespace MyBills.Infrastructure.Persistence
 
         private async Task DispatchEvents(CancellationToken cancellationToken)
         {
-            var domainEventEntities = ChangeTracker.Entries<IHasDomainEvent>()
+            DomainEvent[] domainEventEntities = ChangeTracker.Entries<IHasDomainEvent>()
                 .Select(x => x.Entity.DomainEvents)
                 .SelectMany(x => x)
                 .ToArray();
 
-            foreach (var domainEvent in domainEventEntities)
+            foreach (DomainEvent domainEvent in domainEventEntities)
             {
                 await _domainEventService.PublishAsync(domainEvent, cancellationToken);
             }

@@ -11,12 +11,7 @@ namespace MyBills.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            var cosmosEndpoint = Environment.GetEnvironmentVariable("CosmosDb_Endpoint");
-            var cosmosKey = Environment.GetEnvironmentVariable("CosmosDb_Key");
-            var cosmosDbName = Environment.GetEnvironmentVariable("CosmosDb_DbName");
-
-            services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(
-                options => options.UseCosmos(cosmosEndpoint, cosmosKey, cosmosDbName));
+            services.AddDbContext<IApplicationDbContext, ApplicationDbContext>();
 
             services.AddScoped<IDomainEventService, DomainEventService>();
 

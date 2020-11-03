@@ -11,6 +11,8 @@ namespace MyBills.Infrastructure.Persistence.Configurations
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
 
             builder.HasPartitionKey(k => k.Id);
+
+            builder.ToContainer("Accounts");
         }
     }
 }

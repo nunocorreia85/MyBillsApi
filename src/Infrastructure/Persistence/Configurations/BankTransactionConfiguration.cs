@@ -12,6 +12,8 @@ namespace MyBills.Infrastructure.Persistence.Configurations
 
             builder.HasPartitionKey(k => k.Id);
 
+            builder.ToContainer("BankTransactions");
+
             builder.Ignore(e => e.DomainEvents);
 
             builder.Property(t => t.Memo)

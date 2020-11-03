@@ -23,16 +23,16 @@ namespace MyBills.Application.Common.Behaviours
         {
             _timer.Start();
 
-            var response = await next();
+            TResponse response = await next();
 
             _timer.Stop();
 
-            var elapsedMilliseconds = _timer.ElapsedMilliseconds;
+            long elapsedMilliseconds = _timer.ElapsedMilliseconds;
 
             if (elapsedMilliseconds > 500)
             {
-                var requestName = typeof(TRequest).Name;
-                                
+                string requestName = typeof(TRequest).Name;
+
                 _logger.LogWarning("MyBills Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
                     requestName, elapsedMilliseconds, request);
             }

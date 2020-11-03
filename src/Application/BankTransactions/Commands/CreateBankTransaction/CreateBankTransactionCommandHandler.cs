@@ -9,6 +9,7 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
     public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, string>
     {
         private readonly IApplicationDbContext _context;
+
         public CreateBankTransactionCommandHandler(IApplicationDbContext applicationDbContext)
         {
             _context = applicationDbContext;
@@ -16,7 +17,7 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 
         public async Task<string> Handle(CreateBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Domain.Entities.BankTransaction
+            Domain.Entities.BankTransaction entity = new Domain.Entities.BankTransaction
             {
                 AccountId = request.AccountId,
                 Amount = request.Amount,
@@ -29,8 +30,8 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
             _context.BankTransactions.Add(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
-            return null;
-            //return entity.Id;
+
+            return entity.Id;
         }
     }
 }
