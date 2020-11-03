@@ -42,7 +42,7 @@ namespace MyBills.Api
 
         [FunctionName("CreateAccount")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "accounts")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "accounts")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("Creating a new account");
