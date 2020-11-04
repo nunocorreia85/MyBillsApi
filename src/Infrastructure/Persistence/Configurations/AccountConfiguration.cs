@@ -8,11 +8,10 @@ namespace MyBills.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
-
-            builder.HasPartitionKey(k => k.Id);
-
-            builder.ToContainer("Accounts");
+            builder.ToTable(nameof(Account));
+            builder.Property(t => t.OwnerName)
+                .HasMaxLength(200)
+                .IsRequired();
         }
     }
 }

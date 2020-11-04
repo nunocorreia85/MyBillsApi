@@ -2,11 +2,11 @@ using MediatR;
 
 namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {
-    public class CreateBankTransactionCommand : IRequest<string>
+    public class CreateBankTransactionCommand : IRequest<long>
     {
         public string Memo { get; set; }
         public decimal Amount { get; set; }
-        public string CategoryId { get; set; }
-        public string AccountId { get; set; }
+        public long CategoryId { get; set; }
+        public long AccountId { get; set; }
     }
 }

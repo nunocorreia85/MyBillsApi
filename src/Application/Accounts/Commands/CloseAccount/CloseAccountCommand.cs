@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace MyBills.Application.Accounts.Commands.CloseAccount
 {

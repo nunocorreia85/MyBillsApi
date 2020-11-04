@@ -7,10 +7,13 @@ namespace MyBills.Domain.Entities
     public class BankTransaction : AuditableEntity, IHasDomainEvent
     {
         public string Memo { get; set; }
+        
         public decimal Amount { get; set; }
-        public string CategoryId { get; set; }
-        public string AccountId { get; set; }
-
+        
+        public long CategoryId { get; set; }
+        
+        public long AccountId { get; set; }
+        
         private bool _deleted;
 
         public bool Deleted
@@ -25,6 +28,10 @@ namespace MyBills.Domain.Entities
                 _deleted = value;
             }
         }
+
+        public TransactionCategory TransactionCategory { get; set; }
+
+        public Account Account { get; set; }
 
         public List<DomainEvent> DomainEvents { get; set; } = new List<DomainEvent>();
     }

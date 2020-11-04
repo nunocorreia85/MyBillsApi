@@ -8,11 +8,7 @@ namespace MyBills.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<BankTransaction> builder)
         {
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
-
-            builder.HasPartitionKey(k => k.Id);
-
-            builder.ToContainer("BankTransactions");
+            builder.ToTable(nameof(BankTransaction));
 
             builder.Ignore(e => e.DomainEvents);
 

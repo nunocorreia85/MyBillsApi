@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {
-    public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, string>
+    public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, long>
     {
         private readonly IApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
             _context = applicationDbContext;
         }
 
-        public async Task<string> Handle(CreateBankTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<long> Handle(CreateBankTransactionCommand request, CancellationToken cancellationToken)
         {
             Domain.Entities.BankTransaction entity = new Domain.Entities.BankTransaction
             {

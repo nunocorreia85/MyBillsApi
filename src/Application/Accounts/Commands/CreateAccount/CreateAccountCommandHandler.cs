@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyBills.Application.Accounts.Commands.CreateAccount
 {
-    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, string>
+    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, long>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -14,7 +14,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<string> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
+        public async Task<long> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
             Domain.Entities.Account entity = new Domain.Entities.Account
             {

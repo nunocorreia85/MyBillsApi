@@ -2,6 +2,7 @@
 using MyBills.Api;
 using MyBills.Application;
 using MyBills.Infrastructure;
+using System;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 namespace MyBills.Api
