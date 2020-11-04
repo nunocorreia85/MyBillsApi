@@ -10,14 +10,10 @@ namespace MyBills.Api
     public class Startup : FunctionsStartup
     {
         public override void Configure(IFunctionsHostBuilder builder)
-        {
+        {            
             builder.Services.AddApplication();
-            builder.Services.AddInfrastructure();
-        }
-
-        public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
-        {
-            base.ConfigureAppConfiguration(builder);
+            var context = builder.GetContext();
+            builder.Services.AddInfrastructure(context.Configuration);
         }
     }
 }

@@ -1,7 +1,7 @@
 Run a powershell in the solution folder:
 
 Set environment variable:
-$env:SqlConnectionString="Server=tcp:localhost,1433;Initial Catalog=mybillsdb;User ID=sa;Password=P@ssw0rd;"
+$env:SqlConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=mybillsdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
 
 create initial script:
 dotnet ef migrations add InitialCreate --project src\Infrastructure --startup-project src\Api --output-dir Persistence\Migrations

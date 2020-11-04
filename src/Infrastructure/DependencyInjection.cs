@@ -10,10 +10,9 @@ namespace MyBills.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            if (bool.TryParse(Environment.GetEnvironmentVariable("UseInMemoryDatabase"), out var useInMemoryDatabase) 
-                && useInMemoryDatabase)
+            if (configuration.GetValue<bool>("UseInMemoryDatabase"))
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseInMemoryDatabase("MyBillsDb"));
@@ -21,8 +20,7 @@ namespace MyBills.Infrastructure
             else
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(
-                        Environment.GetEnvironmentVariable("SqlConnectionString"),
+                    options.UseSqlServer(configuration.GetConnectionString("SQLConnectionString"),
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }
 
