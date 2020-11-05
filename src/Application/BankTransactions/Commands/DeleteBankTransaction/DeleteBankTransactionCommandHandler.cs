@@ -1,9 +1,9 @@
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransaction
 {
@@ -18,12 +18,9 @@ namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransaction
 
         public async Task<Unit> Handle(DeleteBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            BankTransaction entity = await _context.BankTransactions.FindAsync(request.Id);
+            var entity = await _context.BankTransactions.FindAsync(request.Id);
 
-            if (entity == null)
-            {
-                throw new NotFoundException(nameof(BankTransaction), request.Id);
-            }
+            if (entity == null) throw new NotFoundException(nameof(BankTransaction), request.Id);
 
             entity.Deleted = true;
 

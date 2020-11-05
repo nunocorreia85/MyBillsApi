@@ -1,5 +1,5 @@
-﻿using MyBills.Application.Common.Interfaces;
-using System;
+﻿using System;
+using MyBills.Application.Common.Interfaces;
 
 namespace MyBills.Infrastructure.Services
 {

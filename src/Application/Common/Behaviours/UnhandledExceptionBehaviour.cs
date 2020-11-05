@@ -1,8 +1,8 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace MyBills.Application.Common.Behaviours
 {
@@ -15,7 +15,8 @@ namespace MyBills.Application.Common.Behaviours
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             try
             {
@@ -23,9 +24,10 @@ namespace MyBills.Application.Common.Behaviours
             }
             catch (Exception ex)
             {
-                string requestName = typeof(TRequest).Name;
+                var requestName = typeof(TRequest).Name;
 
-                _logger.LogError(ex, "MyBills Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.LogError(ex, "MyBills Request: Unhandled Exception for Request {Name} {@Request}", requestName,
+                    request);
 
                 throw;
             }

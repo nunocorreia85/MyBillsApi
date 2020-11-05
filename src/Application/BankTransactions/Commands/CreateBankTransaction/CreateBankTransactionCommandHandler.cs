@@ -1,8 +1,9 @@
-using MediatR;
-using MyBills.Application.Common.Interfaces;
-using MyBills.Domain.Events;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using MyBills.Application.Common.Interfaces;
+using MyBills.Domain.Entities;
+using MyBills.Domain.Events;
 
 namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {
@@ -17,7 +18,7 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 
         public async Task<long> Handle(CreateBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            Domain.Entities.BankTransaction entity = new Domain.Entities.BankTransaction
+            var entity = new BankTransaction
             {
                 AccountId = request.AccountId,
                 Amount = request.Amount,

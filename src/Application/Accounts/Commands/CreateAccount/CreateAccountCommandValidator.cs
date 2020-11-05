@@ -8,7 +8,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
     {
         public UpdateAccountCommandValidator()
         {
-            IbanValidator ibanValidator = new IbanValidator();
+            var ibanValidator = new IbanValidator();
             RuleFor(v => v.BankAccountNumber)
                 .Iban(ibanValidator);
             RuleFor(v => v.OwnerName)

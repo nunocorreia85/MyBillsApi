@@ -4,25 +4,21 @@ using Microsoft.Extensions.DependencyInjection;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Infrastructure.Persistence;
 using MyBills.Infrastructure.Services;
-using System;
 
 namespace MyBills.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services,
+            IConfiguration configuration)
         {
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
-            {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseInMemoryDatabase("MyBillsDb"));
-            }
             else
-            {
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("SQLConnectionString"),
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-            }
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 

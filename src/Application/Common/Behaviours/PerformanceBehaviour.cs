@@ -1,15 +1,15 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace MyBills.Application.Common.Behaviours
 {
     public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        private readonly Stopwatch _timer;
         private readonly ILogger<TRequest> _logger;
+        private readonly Stopwatch _timer;
 
         public PerformanceBehaviour(
             ILogger<TRequest> logger)
@@ -19,21 +19,23 @@ namespace MyBills.Application.Common.Behaviours
             _logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             _timer.Start();
 
-            TResponse response = await next();
+            var response = await next();
 
             _timer.Stop();
 
-            long elapsedMilliseconds = _timer.ElapsedMilliseconds;
+            var elapsedMilliseconds = _timer.ElapsedMilliseconds;
 
             if (elapsedMilliseconds > 500)
             {
-                string requestName = typeof(TRequest).Name;
+                var requestName = typeof(TRequest).Name;
 
-                _logger.LogWarning("MyBills Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
+                _logger.LogWarning(
+                    "MyBills Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
                     requestName, elapsedMilliseconds, request);
             }
 

@@ -1,19 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using MyBills.Application.Common.Interfaces;
-using MyBills.Domain.Common;
-using MyBills.Domain.Entities;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MyBills.Application.Common.Interfaces;
+using MyBills.Domain.Common;
+using MyBills.Domain.Entities;
 
 namespace MyBills.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        private readonly IDomainEventService _domainEventService;
         private readonly IDateTime _dateTime;
+        private readonly IDomainEventService _domainEventService;
 
         public ApplicationDbContext(
             DbContextOptions options,
@@ -30,8 +29,7 @@ namespace MyBills.Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (EntityEntry<AuditableEntity> entry in ChangeTracker.Entries<AuditableEntity>())
-            {
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -45,9 +43,8 @@ namespace MyBills.Infrastructure.Persistence
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
-            }
 
-            int result = await base.SaveChangesAsync(cancellationToken);
+            var result = await base.SaveChangesAsync(cancellationToken);
 
             await DispatchEvents(cancellationToken);
 
@@ -63,15 +60,13 @@ namespace MyBills.Infrastructure.Persistence
 
         private async Task DispatchEvents(CancellationToken cancellationToken)
         {
-            DomainEvent[] domainEventEntities = ChangeTracker.Entries<IHasDomainEvent>()
+            var domainEventEntities = ChangeTracker.Entries<IHasDomainEvent>()
                 .Select(x => x.Entity.DomainEvents)
                 .SelectMany(x => x)
                 .ToArray();
 
-            foreach (DomainEvent domainEvent in domainEventEntities)
-            {
+            foreach (var domainEvent in domainEventEntities)
                 await _domainEventService.PublishAsync(domainEvent, cancellationToken);
-            }
         }
     }
 }

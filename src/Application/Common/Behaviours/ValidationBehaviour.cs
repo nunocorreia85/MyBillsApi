@@ -1,9 +1,9 @@
-﻿using FluentValidation;
-using MediatR;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
+using MediatR;
 using ValidationException = MyBills.Application.Common.Exceptions.ValidationException;
 
 namespace MyBills.Application.Common.Behaviours
@@ -18,20 +18,20 @@ namespace MyBills.Application.Common.Behaviours
             _validators = validators;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+            RequestHandlerDelegate<TResponse> next)
         {
             if (_validators.Any())
             {
-                ValidationContext<TRequest> context = new ValidationContext<TRequest>(request);
+                var context = new ValidationContext<TRequest>(request);
 
-                FluentValidation.Results.ValidationResult[] validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
-                List<FluentValidation.Results.ValidationFailure> failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
+                var validationResults =
+                    await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
+                var failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
 
-                if (failures.Count != 0)
-                {
-                    throw new ValidationException(failures);
-                }
+                if (failures.Count != 0) throw new ValidationException(failures);
             }
+
             return await next();
         }
     }

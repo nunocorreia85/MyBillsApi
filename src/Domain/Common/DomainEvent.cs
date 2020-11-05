@@ -2,7 +2,6 @@
 
 namespace MyBills.Domain.Common
 {
-
     public abstract class DomainEvent
     {
         protected DomainEvent()

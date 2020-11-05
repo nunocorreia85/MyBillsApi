@@ -1,7 +1,8 @@
-﻿using MediatR;
-using MyBills.Application.Common.Interfaces;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
+using MyBills.Application.Common.Interfaces;
+using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Commands.CreateAccount
 {
@@ -16,7 +17,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
 
         public async Task<long> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Account entity = new Domain.Entities.Account
+            var entity = new Account
             {
                 Balance = request.Balance,
                 BankAccountNumber = request.BankAccountNumber,
