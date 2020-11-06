@@ -31,13 +31,7 @@ jobs:
         dotnet tool install --global dotnet-ef        
         popd
         echo "update database"
-        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release
-    - name: Azure SQL Deploy
-      uses: Azure/sql-action@v1
-      with:        
-        server-name: ${{ secrets.AZURE_SERVER_NAME }}        
-        connection-string: ${{ secrets.AZURE_CONNECTION_STRING }}        
-        sql-file: migrations.sql
+        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release    
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       id: fa
