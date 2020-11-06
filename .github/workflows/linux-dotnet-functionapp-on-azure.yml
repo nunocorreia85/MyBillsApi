@@ -28,9 +28,10 @@ jobs:
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
         dotnet test --configuration Release
-        dotnet tool install --global dotnet-ef
-        dotnet ef database update -p ../Infrastructure -s Api.csproj --no-build
+        dotnet tool install --global dotnet-ef        
         popd
+        echo "update database"
+        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:        
