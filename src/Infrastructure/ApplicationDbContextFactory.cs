@@ -12,6 +12,7 @@ namespace MyBills.Infrastructure
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var environmentVariables = Environment.GetEnvironmentVariables();
+            Console.WriteLine("ApplicationDbContextFactory:");
             foreach (DictionaryEntry dictionaryEntry in environmentVariables)
             {
                 Console.WriteLine("Key: " + dictionaryEntry.Key + " value: " + dictionaryEntry.Value);
