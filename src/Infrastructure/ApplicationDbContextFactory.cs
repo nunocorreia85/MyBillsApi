@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Logging;
 using MyBills.Infrastructure.Persistence;
 
 namespace MyBills.Infrastructure
@@ -11,16 +11,14 @@ namespace MyBills.Infrastructure
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            Console.WriteLine("running ApplicationDbContextFactory.CreateDbContext");
-            Console.WriteLine("args:");
-            foreach (var arg in args)
+            var environmentVariables = Environment.GetEnvironmentVariables();
+            foreach (DictionaryEntry dictionaryEntry in environmentVariables)
             {
-                Console.WriteLine(arg);
+                Console.WriteLine("Key: " + dictionaryEntry.Key + " value: " + dictionaryEntry.Value);
             }
-            
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseSqlServer(
-                Environment.GetEnvironmentVariable("SQLConnectionString"));
+                Environment.GetEnvironmentVariable("SqlConnectionString"));
 
             return new ApplicationDbContext(optionsBuilder.Options, null, null);
         }
