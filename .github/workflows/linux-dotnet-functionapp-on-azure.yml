@@ -29,8 +29,8 @@ jobs:
         dotnet build --configuration Release --output ./output
         dotnet test --configuration Release
         dotnet tool install --global dotnet-ef
-        dotnet ef database update -p ../Infrastructure -s Api.csproj
-        popd
+        dotnet ef database update -p ../Infrastructure -s Api.csproj --no-build
+        popdz
     - name: Azure SQL Deploy
       uses: Azure/sql-action@v1
       with:        
