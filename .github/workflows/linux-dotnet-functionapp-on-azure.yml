@@ -27,7 +27,7 @@ jobs:
         dotnet build --configuration Release --output ./output
         dotnet test --configuration Release
         dotnet tool install --global dotnet-ef
-        dotnet ef migrations script --project src\Infrastructure --startup-project src\Api --output migrations.sql --idempotent
+        dotnet ef migrations script --project ..\Infrastructure --startup-project Api.csproj --output migrations.sql  --idempotent
         popd
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
