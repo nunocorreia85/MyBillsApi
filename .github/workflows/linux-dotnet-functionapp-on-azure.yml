@@ -20,19 +20,23 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: 'Resolve Project Dependencies Using Dotnet'
-      env: 
-        SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}
+    - name: 'Dotnet Build and Test'      
       shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
-        dotnet test --configuration Release
-        dotnet tool install --global dotnet-ef        
+        dotnet test --configuration Release                
         popd
         echo "update database"
-        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release    
-    - name: 'Run Azure Functions Action'
+        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release
+    - name: 'Run Migrations on Azure SQL Database'
+      env:
+        SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}
+      shell: bash
+      run: |
+        dotnet tool install --global dotnet-ef        
+        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release
+    - name: 'Deploy Azure Functions'
       uses: Azure/functions-action@v1
       id: fa
       with:
