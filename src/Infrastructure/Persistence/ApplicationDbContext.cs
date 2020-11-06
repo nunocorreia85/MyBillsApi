@@ -9,7 +9,7 @@ using MyBills.Domain.Entities;
 
 namespace MyBills.Infrastructure.Persistence
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly IDateTime _dateTime;
         private readonly IDomainEventService _domainEventService;
@@ -19,7 +19,6 @@ namespace MyBills.Infrastructure.Persistence
             IDomainEventService domainEventService,
             IDateTime dateTime) : base(options)
         {
-            Database.EnsureCreated();
             _domainEventService = domainEventService;
             _dateTime = dateTime;
         }
