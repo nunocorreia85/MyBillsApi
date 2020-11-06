@@ -21,12 +21,22 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: 'Resolve Project Dependencies Using Dotnet'
+      env: 
+        SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}
       shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
         dotnet test --configuration Release
+        dotnet tool install --global dotnet-ef
+        dotnet ef migrations script --project ../Infrastructure --startup-project Api.csproj --output migrations.sql  --idempotent
         popd
+    - name: Azure SQL Deploy
+      uses: Azure/sql-action@v1
+      with:        
+        server-name: ${{ secrets.AZURE_SERVER_NAME }}        
+        connection-string: ${{ secrets.AZURE_CONNECTION_STRING }}        
+        sql-file: migrations.sql
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       id: fa
