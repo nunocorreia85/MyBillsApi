@@ -9,7 +9,7 @@ env:
   DOTNET_VERSION: '3.1'              # set this to the dotnet version to use
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
     - name: 'Checkout GitHub Action'
@@ -19,17 +19,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+
     - name: 'Build and Test'
       shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
         dotnet test --configuration Release       
-        popd       
-  Deploy:
-    runs-on: ubuntu-latest
-    steps:      
-    - name: 'Run Migrations on Azure SQL database'
+        popd    
+    - name: 'Run Migrations on Azzure SQL database'
       env: 
         SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}
       shell: bash
@@ -42,4 +40,4 @@ jobs:
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}   
+        publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
