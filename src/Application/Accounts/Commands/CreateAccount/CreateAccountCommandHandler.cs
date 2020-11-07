@@ -24,7 +24,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
                 OwnerName = request.OwnerName
             };
 
-            _applicationDbContext.Accounts.Add(entity);
+            await _applicationDbContext.Accounts.AddAsync(entity, cancellationToken);
 
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

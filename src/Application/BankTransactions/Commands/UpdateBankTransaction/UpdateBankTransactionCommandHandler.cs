@@ -9,24 +9,25 @@ namespace MyBills.Application.BankTransactions.Commands.UpdateBankTransaction
 {
     public class UpdateBankTransactionCommandHandler : IRequestHandler<UpdateBankTransactionCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext _applicationDbContext;
 
         public UpdateBankTransactionCommandHandler(IApplicationDbContext applicationDbContext)
         {
-            _context = applicationDbContext;
+            _applicationDbContext = applicationDbContext;
         }
 
         public async Task<Unit> Handle(UpdateBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.BankTransactions.FindAsync(request.Id);
+            var requestIds = new object[] {request.Id};
+            var entity = await _applicationDbContext.BankTransactions.FindAsync(requestIds, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(nameof(BankTransaction), request.Id);
+            if (entity == null) throw new NotFoundException(nameof(BankTransaction), requestIds);
 
             entity.Amount = request.Amount;
             entity.CategoryId = request.CategoryId;
             entity.Memo = request.Memo;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

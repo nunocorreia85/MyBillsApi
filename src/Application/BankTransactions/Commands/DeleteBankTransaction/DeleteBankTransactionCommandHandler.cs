@@ -9,22 +9,23 @@ namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransaction
 {
     public class DeleteBankTransactionCommandHandler : IRequestHandler<DeleteBankTransactionCommand>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext _applicationDbContext;
 
         public DeleteBankTransactionCommandHandler(IApplicationDbContext applicationDbContext)
         {
-            _context = applicationDbContext;
+            _applicationDbContext = applicationDbContext;
         }
 
         public async Task<Unit> Handle(DeleteBankTransactionCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.BankTransactions.FindAsync(request.Id);
+            var requestIds = new object[] {request.Id};
+            var entity = await _applicationDbContext.BankTransactions.FindAsync(requestIds, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(nameof(BankTransaction), request.Id);
+            if (entity == null) throw new NotFoundException(nameof(BankTransaction), requestIds);
 
             entity.Deleted = true;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

@@ -4,6 +4,6 @@ namespace MyBills.Application.Accounts.Commands.CloseAccount
 {
     public class CloseAccountCommand : IRequest
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
     }
 }

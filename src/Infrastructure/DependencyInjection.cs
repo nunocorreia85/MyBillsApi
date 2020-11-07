@@ -17,7 +17,7 @@ namespace MyBills.Infrastructure
                     options.UseInMemoryDatabase("MyBillsDb"));
             else
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(configuration.GetConnectionString("SQLConnectionString"),
+                    options.UseSqlServer(configuration.GetConnectionString("SqlConnectionString"),
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());

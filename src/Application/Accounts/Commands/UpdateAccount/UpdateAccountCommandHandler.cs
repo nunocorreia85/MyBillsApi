@@ -18,9 +18,10 @@ namespace MyBills.Application.Accounts.Commands.UpdateAccount
 
         public async Task<Unit> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _applicationDbContext.Accounts.FindAsync(request.Id, cancellationToken);
+            var requestIds = new object[] {request.Id};
+            var entity = await _applicationDbContext.Accounts.FindAsync(requestIds, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(nameof(Account), request.Id);
+            if (entity == null) throw new NotFoundException(nameof(Account), requestIds);
 
             entity.OwnerName = request.OwnerName;
             entity.BankAccountNumber = request.BankAccountNumber;

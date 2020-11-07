@@ -9,11 +9,11 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {
     public class CreateBankTransactionCommandHandler : IRequestHandler<CreateBankTransactionCommand, long>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IApplicationDbContext _applicationDbContext;
 
         public CreateBankTransactionCommandHandler(IApplicationDbContext applicationDbContext)
         {
-            _context = applicationDbContext;
+            _applicationDbContext = applicationDbContext;
         }
 
         public async Task<long> Handle(CreateBankTransactionCommand request, CancellationToken cancellationToken)
@@ -28,9 +28,9 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 
             entity.DomainEvents.Add(new BankTransactionCreatedEvent(entity));
 
-            _context.BankTransactions.Add(entity);
+            await _applicationDbContext.BankTransactions.AddAsync(entity, cancellationToken);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
         }

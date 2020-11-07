@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Application.IntegrationTests
+namespace MyBills.Application.IntegrationTests
 {
     public class Tests
     {
