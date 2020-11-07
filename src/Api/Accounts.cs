@@ -17,7 +17,7 @@ namespace MyBills.Api
         {
             _mediator = mediator;
         }
-        
+
         [FunctionName("CreateAccount")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "accounts")]
