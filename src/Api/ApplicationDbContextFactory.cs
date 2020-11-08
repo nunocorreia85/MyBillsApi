@@ -12,10 +12,10 @@ namespace MyBills.Api
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             Console.WriteLine("MyBills.Api.ApplicationDbContextFactory:");
-
+            
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("local.settings.json")
+                //.AddJsonFile("local.settings.json")
                 .AddEnvironmentVariables()
                 .Build();
             
