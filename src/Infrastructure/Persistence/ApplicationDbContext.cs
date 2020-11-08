@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Common;
 using MyBills.Domain.Entities;
@@ -11,16 +12,19 @@ namespace MyBills.Infrastructure.Persistence
 {
     public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     {
+        private readonly IConfiguration _configuration;
         private readonly IDateTime _dateTime;
         private readonly IDomainEventService _domainEventService;
 
         public ApplicationDbContext(
             DbContextOptions options,
             IDomainEventService domainEventService,
-            IDateTime dateTime) : base(options)
+            IDateTime dateTime,
+            IConfiguration configuration) : base(options)
         {
             _domainEventService = domainEventService;
             _dateTime = dateTime;
+            _configuration = configuration;
         }
 
         public DbSet<BankTransaction> BankTransactions { get; set; }
@@ -48,6 +52,17 @@ namespace MyBills.Infrastructure.Persistence
             await DispatchEvents(cancellationToken);
 
             return result;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            if (builder.IsConfigured) return;
+
+            if (_configuration.GetValue<bool>("Values:UseInMemoryDatabase"))
+                builder.UseInMemoryDatabase("MyBillsDb");
+            else
+                builder.UseSqlServer(_configuration.GetConnectionString("SqlConnectionString"),
+                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

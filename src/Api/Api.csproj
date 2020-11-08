@@ -26,5 +26,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BankTransactions" />
+    <Folder Include="TransactionCategories" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Accounts\test.cs" />
   </ItemGroup>	
 </Project>
