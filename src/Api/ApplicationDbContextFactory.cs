@@ -16,12 +16,12 @@ namespace MyBills.Api
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("local.settings.json")
+                .AddEnvironmentVariables()
                 .Build();
-
-            // Console.WriteLine(configuration?.GetDebugView());
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            
             var connectionString = configuration.GetConnectionString("SqlConnectionString");
-            Console.WriteLine(connectionString);
+            
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseSqlServer(connectionString ?? throw new Exception("SqlConnectionString is empty"));
 
             //TODO: fix injection 
