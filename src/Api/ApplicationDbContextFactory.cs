@@ -13,13 +13,12 @@ namespace MyBills.Api
         {
             Console.WriteLine("MyBills.Api.ApplicationDbContextFactory:");
             
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                //.AddJsonFile("local.settings.json")
-                .AddEnvironmentVariables()
-                .Build();
+            // var configuration = new ConfigurationBuilder()
+            //     .SetBasePath(Directory.GetCurrentDirectory())
+            //     .AddJsonFile("local.settings.json")
+            //     .Build();
             
-            var connectionString = configuration.GetConnectionString("SqlConnectionString");
+            var connectionString = Environment.GetEnvironmentVariable("SqlConnectionString");
             
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseSqlServer(connectionString ?? throw new Exception("SqlConnectionString is empty"));
