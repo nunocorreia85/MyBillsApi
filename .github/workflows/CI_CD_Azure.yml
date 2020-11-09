@@ -1,7 +1,7 @@
 name: Deploy DotNet project to Azure function app with a Linux environment
 
-on:
-  [push]
+on: ["push", "pull_request"]
+  #[push]
 
 env:
   AZURE_FUNCTIONAPP_NAME: MyBillsApi  # set this to your application's name  
@@ -23,8 +23,14 @@ jobs:
       run: dotnet build src/Api -c Release -o src/Api/output
 
     - name: 'Run Test'
-      run: dotnet test -c Release
+      run: dotnet test -c Release /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
     
+    - name: 'Publish coverage report to coveralls.io'
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./TestResults/coverage.info 
+        
     - name: 'Install EntityFramework Core'
       run: dotnet tool install --global dotnet-ef
 
