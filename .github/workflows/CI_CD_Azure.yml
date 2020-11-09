@@ -19,19 +19,20 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     
-    - name: 'Build'
+    - name: 'Run Build'
       run: dotnet build src/Api -c Release -o src/Api/output
 
-    - name: 'Test'
+    - name: 'Run Test'
       run: dotnet test -c Release
+    
+    - name: 'Install EntityFramework Core'
+      run: dotnet tool install --global dotnet-ef
 
     - name: 'Run Migrations on Azzure SQL database'
       env: 
-        SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}
-      shell: bash
-      run: |              
-        dotnet tool install --global dotnet-ef        
-        dotnet ef database update -p src/Infrastructure -s src/Api --configuration Release
+        SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}      
+      run: dotnet ef database update -p src/Infrastructure -s src/Api -c Release --no-build
+      
     - name: 'Deploy Azure Functions'
       uses: Azure/functions-action@v1
       id: fa
