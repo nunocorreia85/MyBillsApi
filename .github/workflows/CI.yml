@@ -1,4 +1,4 @@
-name: BuildDeploy
+name: BuildTest
 
 on:
   push:
