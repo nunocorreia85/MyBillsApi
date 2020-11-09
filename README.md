@@ -4,7 +4,7 @@
 This is a project showing how to build a Azure Functions API in .Net Core 3.1
 
 
-Guide:
+Guide manual:
 In powershell run the following:
 
 Set environment variable:
