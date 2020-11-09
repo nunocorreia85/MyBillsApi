@@ -1,6 +1,9 @@
 name: BuildDeploy
 
-on: ["push", "pull_request"]
+on: 
+  push:
+    tags: 
+      - v1.*
   #[push]
 
 env:
