@@ -1,4 +1,4 @@
-![Build Status](https://github.com/nunocorreia85/MyBillsApi/workflows/BuildDeploy/badge.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/nunocorreia85/MyBillsApi/badge.svg?branch=master)](https://coveralls.io/github/nunocorreia85/MyBillsApi?branch=master)[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/mikuam/TicketStore/blob/master/LICENSE)
+![Build Status](https://github.com/nunocorreia85/MyBillsApi/workflows/BuildTest/badge.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/nunocorreia85/MyBillsApi/badge.svg?branch=master)](https://coveralls.io/github/nunocorreia85/MyBillsApi?branch=master)[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/mikuam/TicketStore/blob/master/LICENSE)
 
 # MyBills API
 This is a project showing how to build a Azure Functions API in .Net Core 3.1
