@@ -7,9 +7,9 @@ using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.Accounts.Commands.CloseAccount
+namespace MyBills.Application.Accounts.Commands.CloseAccounts
 {
-    public class CloseAccountCommandHandler : IRequestHandler<CloseAccountCommand>
+    public class CloseAccountCommandHandler : IRequestHandler<CloseAccountsCommand>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -18,7 +18,7 @@ namespace MyBills.Application.Accounts.Commands.CloseAccount
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<Unit> Handle(CloseAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CloseAccountsCommand request, CancellationToken cancellationToken)
         {
             var requestIds = new object[] {request.Ids};
             var entities = await _applicationDbContext.Accounts.Where(account => request.Ids.Contains(account.Id)).ToListAsync(cancellationToken);

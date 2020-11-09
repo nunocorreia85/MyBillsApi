@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
@@ -14,6 +13,7 @@ using Microsoft.Extensions.Primitives;
 using Moq;
 using MyBills.Api.Accounts;
 using MyBills.Application.Accounts.Commands.CreateAccount;
+using MyBills.Application.Accounts.Commands.UpdateAccount;
 using MyBills.Application.IntegrationTests.Infrastructure;
 using MyBills.Domain.Entities;
 using Newtonsoft.Json;
@@ -24,10 +24,6 @@ namespace MyBills.Application.IntegrationTests
     [TestFixture]
     public class AccountsTest
     {
-        
-        private IMediator _mediatorService;
-
-
         [OneTimeSetUp]
         public void Init()
         {
@@ -35,7 +31,10 @@ namespace MyBills.Application.IntegrationTests
             _mediatorService = testHost.ServiceProvider.GetRequiredService<IMediator>();
         }
 
-        [Test, Order(1)]
+        private IMediator _mediatorService;
+
+        [Test]
+        [Order(1)]
         public async Task CreateAccount_Run_FailValidations()
         {
             // arrange
@@ -45,23 +44,21 @@ namespace MyBills.Application.IntegrationTests
             {
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
-                    Balance = 1,
+                    Balance = 3,
                     OwnerName = "Joao",
                     BankAccountNumber = "123445544"
                 }), Encoding.UTF8, "application/json")
             };
-    
+
             // act
             var result = await createAccountFunction.Run(createAccountRequest, mock.Object, CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<BadRequestObjectResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<BadRequestObjectResult>(result); });
         }
-        
-        [Test, Order(2)]
+
+        [Test]
+        [Order(2)]
         public async Task CreateAccount_Run_Success()
         {
             // arrange
@@ -71,12 +68,12 @@ namespace MyBills.Application.IntegrationTests
             {
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
-                    Balance = 1,
+                    Balance = 3,
                     OwnerName = "Joao",
                     BankAccountNumber = "DE89370400440532013000"
                 }), Encoding.UTF8, "application/json")
             };
-    
+
             // act
             var result = await createAccountFunction.Run(createAccountRequest, mock.Object, CancellationToken.None);
 
@@ -87,9 +84,37 @@ namespace MyBills.Application.IntegrationTests
                 Assert.AreEqual(1, ((OkObjectResult) result).Value);
             });
         }
+
+        [Test]
+        [Order(3)]
+        public async Task UpdateAccount_Run_Success()
+        {
+            // arrange
+            var mock = new Mock<ILogger>();
+            var updateAccountFunction = new UpdateAccount(_mediatorService);
+            var updateAccountRequest = new HttpRequestMessage
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(new UpdateAccountCommand
+                {
+                    Id = 1,
+                    OwnerName = "Joao",
+                    BankAccountNumber = "CH9300762011623852957"
+                }), Encoding.UTF8, "application/json")
+            };
+
+            // act
+            var result = await updateAccountFunction.Run(updateAccountRequest, mock.Object, CancellationToken.None);
+
+            // assert
+            Assert.Multiple(() =>
+            {
+                Assert.IsInstanceOf<OkResult>(result);
+            });
+        }
         
-        [Test, Order(3)]
-        public async Task Run_CloseAccounts_Success()
+        [Test]
+        [Order(4)]
+        public async Task CloseAccounts_Run_Success()
         {
             // arrange
             var mock = new Mock<ILogger>();
@@ -103,12 +128,12 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkResult>(result);
-                var okObjectResult = (OkResult) result;
             });
         }
-        
-        [Test, Order(4)]
-        public async Task Run_GetAccounts_Success()
+
+        [Test]
+        [Order(5)]
+        public async Task GetAccounts_Run_Success()
         {
             // arrange
             var mock = new Mock<ILogger>();
@@ -123,19 +148,20 @@ namespace MyBills.Application.IntegrationTests
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
                 var okObjectResult = (OkObjectResult) result;
-                var accounts = (List<Account>)okObjectResult.Value;
+                var accounts = (List<Account>) okObjectResult.Value;
                 Assert.IsNotNull(accounts);
                 Assert.AreEqual(1, accounts.Count);
-                Assert.AreEqual("DE89370400440532013000", accounts[0].BankAccountNumber);
-                Assert.AreEqual(1.0M, accounts[0].Balance );
-                Assert.AreEqual(true, accounts[0].Closed );
+                Assert.AreEqual("CH9300762011623852957", accounts[0].BankAccountNumber);
+                Assert.AreEqual(3.0M, accounts[0].Balance);
+                Assert.AreEqual(true, accounts[0].Closed);
             });
         }
+
         private static Dictionary<string, StringValues> CreateDictionary(string key, string value)
         {
             var qs = new Dictionary<string, StringValues>
             {
-                { key, value }
+                {key, value}
             };
             return qs;
         }

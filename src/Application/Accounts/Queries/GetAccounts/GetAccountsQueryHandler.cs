@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.Accounts.Queries
+namespace MyBills.Application.Accounts.Queries.GetAccounts
 {
     internal class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, List<Account>>
     {

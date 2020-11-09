@@ -11,6 +11,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using MyBills.Application.Accounts.Queries;
+using MyBills.Application.Accounts.Queries.GetAccounts;
 
 namespace MyBills.Api.Accounts
 {

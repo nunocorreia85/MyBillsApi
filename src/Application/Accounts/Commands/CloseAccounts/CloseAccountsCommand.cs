@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using MediatR;
 
-namespace MyBills.Application.Accounts.Commands.CloseAccount
+namespace MyBills.Application.Accounts.Commands.CloseAccounts
 {
-    public class CloseAccountCommand : IRequest
+    public class CloseAccountsCommand : IRequest
     {
         public List<long> Ids { get; set; }
     }

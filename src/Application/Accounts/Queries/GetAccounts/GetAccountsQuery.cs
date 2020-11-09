@@ -2,7 +2,7 @@
 using MediatR;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.Accounts.Queries
+namespace MyBills.Application.Accounts.Queries.GetAccounts
 {
     public class GetAccountsQuery : IRequest<List<Account>>
     {

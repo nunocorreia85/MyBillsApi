@@ -1,37 +1,35 @@
-﻿using System.Threading;
+﻿using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using MyBills.Application.Accounts.Commands.CloseAccounts;
+using MyBills.Application.Accounts.Commands.UpdateAccount;
 using MyBills.Application.Common.Exceptions;
 
 namespace MyBills.Api.Accounts
 {
-    public class CloseAccounts
+    public class UpdateAccount
     {
         private readonly IMediator _mediator;
 
-        public CloseAccounts(IMediator mediator)
+        public UpdateAccount(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [FunctionName("CloseAccounts")]
+        [FunctionName("UpdateAccount")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
-            HttpRequest req, ILogger log, CancellationToken token)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
+            HttpRequestMessage req, ILogger log, CancellationToken token)
         {
-            var ids = HttpRequestUtils.GetQueryIds(req);
+            var command = await req.Content.ReadAsAsync<UpdateAccountCommand>(token);
             try
             {
-                await _mediator.Send(new CloseAccountsCommand
-                {
-                    Ids = ids
-                }, token);
+                var id = await _mediator.Send(command, token);
+                log.LogInformation("Updated account with id {id}", id);
                 return new OkResult();
             }
             catch (ValidationException e)
