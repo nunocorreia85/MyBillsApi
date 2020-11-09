@@ -1,0 +1,206 @@
+﻿POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "marie", "Balance": 33, "BankAccountNumber": "2312312313"}
+
+<> 2020-11-09T045147.400.txt
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "marie", "Balance": 33, "BankAccountNumber": "2312312313"}
+
+<> 2020-11-09T045109.400.txt
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "marie", "Balance": 33, "BankAccountNumber": "2312312313"}
+
+<> 2020-11-09T045007.400.txt
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "marie", "Balance": 33, "BankAccountNumber": "2312312313"}
+
+<> 2020-11-09T041802.400.txt
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "marie", "Balance": 33, "BankAccountNumber": "2312312313"}
+
+<> 2020-11-09T041638.400.txt
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "marie", "Balance": 33}
+
+<> 2020-11-09T030732.200.json
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22}
+
+<> 2020-11-09T030454.200.json
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22}
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22}
+
+<> 2020-11-07T044431.200.json
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22, "BankAccountNumber" : "BE1232" }
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22, "BankAccountNumber" : "BE1232" }
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22, "BankAccountNumber" : "BE1232" }
+
+###
+
+GET http://localhost:7071/api/GetAccount
+
+<> 2020-11-07T035315.200.txt
+
+###
+
+GET http://localhost:7071/api/GetAccount
+
+<> 2020-11-07T035130.200.txt
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{"OwnerName": "nuno", "Balance": 22, "BankAccountNumber" : "BE1232" }
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+--data: 
+'{"OwnerName": "nuno", "Balance": 22, "BankAccountNumber" : "BE1232" }'
+
+###
+
+POST http://localhost:7071/api/CreateAccount
+Content-Type: application/json
+
+{
+  "OwnerName": "nuno",
+  "Balance": 22,
+  "BankAccountNumber" : "BE1232"
+}
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{
+  "OwnerName": "nuno",
+  "Balance": 22,
+  "BankAccountNumber" : "BE1232"
+}
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{}
+
+###
+
+GET http://localhost:7071/api/CreateAccount
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{}
+
+###
+
+GET http://localhost:7071/api/CreateAccount
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
+POST http://localhost:7071/admin/functions/CreateAccount
+Content-Type: application/json
+
+{
+  
+}
+
+###
+
