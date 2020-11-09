@@ -28,15 +28,7 @@ namespace MyBills.Api.Accounts
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]
             HttpRequest req, ILogger log, CancellationToken token)
         {
-            var values = req.Query["id"];
-            var ids = new List<long>();
-            foreach (var value in values)
-            {
-                if (long.TryParse(value, out long id))
-                {
-                    ids.Add(id);
-                }
-            }
+            var ids = HttpRequestUtils.GetQueryIds(req);
             var accounts = await _mediator.Send(new GetAccountsQuery
             {
                 Ids = ids
