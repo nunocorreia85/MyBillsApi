@@ -1,0 +1,35 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  DOTNET_VERSION: '3.1'              # set this to the dotnet version to use
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
+
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    - name: Install dependencies
+      run: dotnet restore
+      
+    - name: 'Run Build'
+      run: dotnet build src/Api -c Release -o src/Api/output --no-restore
+
+    - name: 'Run Test'
+      run: dotnet test --no-restore -v normal /p:CollectCoverage=true /p:CoverletOutput=../TestResults/ /p:MergeWith=../TestResults/coverlet.info /p:CoverletOutputFormat=lcov
+    
+    - name: 'Publish coverage report to coveralls.io'
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: ./tests/TestResults/coverage.info       
