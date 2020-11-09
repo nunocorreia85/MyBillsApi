@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Accounts\test.cs" />
+    <Compile Remove="ApplicationDbContextFactory.cs" />
   </ItemGroup>	
 </Project>

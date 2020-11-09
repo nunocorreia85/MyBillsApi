@@ -11,7 +11,7 @@ namespace MyBills.Application.Accounts.Queries
 {
     public class GetAccountsQuery : IRequest<List<Account>>
     {
-        public long? Id { get; set; }
+        public List<long> Ids { get; set; }
     }
 
     internal class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, List<Account>>
@@ -26,7 +26,7 @@ namespace MyBills.Application.Accounts.Queries
         public async Task<List<Account>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
         {
             var query = _applicationDbContext.Accounts.AsQueryable();
-            if (request.Id.HasValue) query = query.Where(account => account.Id == request.Id.Value);
+            if (request.Ids.Any()) query = query.Where(account => request.Ids.Contains(account.Id) );
 
             return await query.ToListAsync(cancellationToken);
         }

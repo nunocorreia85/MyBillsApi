@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -62,11 +61,8 @@ namespace MyBills.Infrastructure.Persistence
             if (_configuration.GetValue<bool>("Values:UseInMemoryDatabase"))
                 builder.UseInMemoryDatabase("MyBillsDb");
             else
-            {
                 builder.UseSqlServer(_configuration.GetConnectionString("SqlConnectionString"),
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
-            }
-                
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
