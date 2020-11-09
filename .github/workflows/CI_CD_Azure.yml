@@ -1,4 +1,4 @@
-name: Deploy DotNet project to Azure function app with a Linux environment
+name: BuildDeploy
 
 on: ["push", "pull_request"]
   #[push]
