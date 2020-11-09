@@ -31,7 +31,7 @@ jobs:
     - name: 'Run Migrations on Azzure SQL database'
       env: 
         SqlConnectionString: ${{ secrets.AZURE_CONNECTION_STRING }}      
-      run: dotnet ef database update -p src/Infrastructure -s src/Api -c Release --no-build
+      run: dotnet ef database update -p src/Infrastructure -s src/Api -c Release
       
     - name: 'Deploy Azure Functions'
       uses: Azure/functions-action@v1
