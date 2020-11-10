@@ -10,6 +10,10 @@ namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
                 .MaximumLength(200);
             RuleFor(v => v.Amount)
                 .NotEqual(0);
+            RuleFor(v => v.AccountId)
+                .NotEqual(0);
+            RuleFor(v => v.CategoryId)
+                .NotEqual(0);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace MyBills.Application.Common.Interfaces
 
         DbSet<Account> Accounts { get; set; }
 
+        DbSet<TransactionCategory> TransactionCategories { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

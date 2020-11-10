@@ -29,6 +29,7 @@ namespace MyBills.Infrastructure.Persistence
 
         public DbSet<BankTransaction> BankTransactions { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<TransactionCategory> TransactionCategories { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

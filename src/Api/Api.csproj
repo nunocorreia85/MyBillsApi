@@ -28,9 +28,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TransactionCategories" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Accounts\test.cs" />
     <Compile Remove="ApplicationDbContextFactory.cs" />
   </ItemGroup>	
