@@ -28,7 +28,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BankTransactions" />
     <Folder Include="TransactionCategories" />
   </ItemGroup>
   <ItemGroup>

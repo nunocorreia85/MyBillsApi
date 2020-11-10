@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 
-namespace MyBills.Api.Accounts
+namespace MyBills.Api.Common
 {
-    public class HttpRequestUtils
+    public static class HttpRequestUtils
     {
         public static List<long> GetQueryIds(HttpRequest req)
         {

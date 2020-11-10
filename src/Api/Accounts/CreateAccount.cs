@@ -32,10 +32,10 @@ namespace MyBills.Api.Accounts
                 log.LogInformation("Account created with id {id}", id);
                 return new OkObjectResult(id);
             }
-            catch (ValidationException e)
+            catch (ValidationException ex)
             {
-                log.LogError("Validations Errors {errors}", e.Errors);
-                return new BadRequestObjectResult("Validation Errors");
+                log.LogError("Validations Errors {errors}", ex.Errors);
+                return new BadRequestObjectResult(ex);
             }
         }
     }

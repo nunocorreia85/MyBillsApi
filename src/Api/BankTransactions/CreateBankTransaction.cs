@@ -6,36 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using MyBills.Application.Accounts.Commands.UpdateAccount;
+using MyBills.Application.BankTransactions.Commands.CreateBankTransaction;
 using MyBills.Application.Common.Exceptions;
 
-namespace MyBills.Api.Accounts
+namespace MyBills.Api.BankTransactions
 {
-    public class UpdateAccount
+    public class CreateBankTransaction
     {
         private readonly IMediator _mediator;
 
-        public UpdateAccount(IMediator mediator)
+        public CreateBankTransaction(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [FunctionName("UpdateAccount")]
+        [FunctionName("CreateBankTransaction")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
             HttpRequestMessage req, ILogger log, CancellationToken token)
         {
-            var command = await req.Content.ReadAsAsync<UpdateAccountCommand>(token);
             try
             {
+                var command = await req.Content.ReadAsAsync<CreateBankTransactionCommand>(token);
                 var id = await _mediator.Send(command, token);
-                log.LogInformation("Updated account with id {id}", id);
-                return new OkResult();
+                return new OkObjectResult(id);
             }
             catch (ValidationException ex)
             {
                 log.LogError("Validations Errors {errors}", ex.Errors);
-                return new BadRequestObjectResult(ex);
+                return new BadRequestObjectResult(ex.Errors);
             }
         }
     }

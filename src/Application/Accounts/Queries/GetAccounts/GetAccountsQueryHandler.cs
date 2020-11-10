@@ -9,7 +9,7 @@ using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Queries.GetAccounts
 {
-    internal class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, List<Account>>
+    internal class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, IEnumerable<Account>>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -18,7 +18,7 @@ namespace MyBills.Application.Accounts.Queries.GetAccounts
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<List<Account>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Account>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
         {
             var query = _applicationDbContext.Accounts.AsQueryable();
             if (request.Ids.Any()) query = query.Where(account => request.Ids.Contains(account.Id) );

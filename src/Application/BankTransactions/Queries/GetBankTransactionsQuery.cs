@@ -2,9 +2,9 @@
 using MediatR;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.Accounts.Queries.GetAccounts
+namespace MyBills.Application.BankTransactions.Queries
 {
-    public class GetAccountsQuery : IRequest<IEnumerable<Account>>
+    public class GetBankTransactionsQuery : IRequest<IEnumerable<BankTransaction>>
     {
         public List<long> Ids { get; set; }
     }

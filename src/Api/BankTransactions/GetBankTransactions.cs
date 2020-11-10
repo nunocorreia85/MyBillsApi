@@ -7,31 +7,31 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
-using MyBills.Application.Accounts.Queries.GetAccounts;
+using MyBills.Application.BankTransactions.Queries;
 
-namespace MyBills.Api.Accounts
+namespace MyBills.Api.BankTransactions
 {
-    public class GetAccounts
+    public class GetBankTransactions
     {
         private readonly IMediator _mediator;
 
-        public GetAccounts(IMediator mediator)
+        public GetBankTransactions(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [FunctionName("GetAccounts")]
+        [FunctionName("GetBankTransactions")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]
             HttpRequest req, ILogger log, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryIds(req);
-            var accounts = await _mediator.Send(
-                new GetAccountsQuery
+            var bankTransactions = await _mediator.Send(
+                new GetBankTransactionsQuery
                 {
                     Ids = ids
                 }, token);
-            return new OkObjectResult(accounts);
+            return new OkObjectResult(bankTransactions);
         }
     }
 }

@@ -10,5 +10,6 @@ namespace MyBills.Domain.Entities
         public RecurringPeriod? RecurringPeriod { get; set; }
         public long AccountId { get; set; }
         public Account Account { get; set; }
+        public bool Disabled { get; set; }
     }
 }
