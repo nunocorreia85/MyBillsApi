@@ -1,5 +1,4 @@
-﻿using MyBills.Domain.Common;
-using MyBills.Domain.Entities;
+﻿using MyBills.Domain.Entities;
 
 namespace MyBills.Domain.Events
 {
