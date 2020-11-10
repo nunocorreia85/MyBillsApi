@@ -32,7 +32,7 @@ The solution is design so that only the outer layers can access in the inner lay
 
 ![diagram concept](.github/ArchitectureDiagram.png)
 
-## Could Infrastructure Architecture
+## Cloud Infrastructure Architecture
 The Solution is designed to work as a serverless application, leveraging the popentials of Azure Functions, Azure SQL Database(serverless), and with a Azure API Gateway.
 Azure will scale out all the components in order to reach the user's demands.
 
