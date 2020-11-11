@@ -30,7 +30,7 @@ namespace MyBills.Application.IntegrationTests
         {
             var testHost = new TestHost();
             _mediatorService = testHost.ServiceProvider.GetRequiredService<IMediator>();
-            await _mediatorService.Send(new CreateAccountCommand()
+            await _mediatorService.Send(new CreateAccountCommand
             {
                 Balance = 0,
                 OwnerName = "Nuno",
@@ -56,7 +56,9 @@ namespace MyBills.Application.IntegrationTests
             };
 
             // act
-            var result = await createBankTransactionFunction.Run(createBankTransactionRequest, mock.Object, CancellationToken.None);
+            var result =
+                await createBankTransactionFunction.Run(createBankTransactionRequest, mock.Object,
+                    CancellationToken.None);
 
             // assert
             Assert.Multiple(() => { Assert.IsInstanceOf<BadRequestObjectResult>(result); });
@@ -81,7 +83,9 @@ namespace MyBills.Application.IntegrationTests
             };
 
             // act
-            var result = await createBankTransactionFunction.Run(createBankTransactionRequest, mock.Object, CancellationToken.None);
+            var result =
+                await createBankTransactionFunction.Run(createBankTransactionRequest, mock.Object,
+                    CancellationToken.None);
 
             // assert
             Assert.Multiple(() =>
@@ -109,15 +113,14 @@ namespace MyBills.Application.IntegrationTests
             };
 
             // act
-            var result = await updateBankTransactionFunction.Run(updateBankTransactionRequest, mock.Object, CancellationToken.None);
+            var result =
+                await updateBankTransactionFunction.Run(updateBankTransactionRequest, mock.Object,
+                    CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<OkResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
         }
-        
+
         [Test]
         [Order(4)]
         public async Task DeletedBankTransactions_Run_Success()
@@ -131,10 +134,7 @@ namespace MyBills.Application.IntegrationTests
             var result = await getBankTransactions.Run(httpRequest, mock.Object, CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<OkResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
         }
 
         [Test]

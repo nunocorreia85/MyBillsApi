@@ -5,7 +5,7 @@ namespace MyBills.Domain.Events
 {
     public class BankTransactionEventBase : DomainEvent
     {
-        private BankTransaction _bankTransaction;
+        private readonly BankTransaction _bankTransaction;
 
         public BankTransactionEventBase(BankTransaction bankTransaction)
         {

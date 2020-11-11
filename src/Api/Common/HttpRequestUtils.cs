@@ -10,12 +10,8 @@ namespace MyBills.Api.Common
             var values = req.Query["id"];
             var ids = new List<long>();
             foreach (var value in values)
-            {
-                if (long.TryParse(value, out long id))
-                {
+                if (long.TryParse(value, out var id))
                     ids.Add(id);
-                }
-            }
 
             return ids;
         }

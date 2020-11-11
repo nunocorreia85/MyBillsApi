@@ -106,12 +106,9 @@ namespace MyBills.Application.IntegrationTests
             var result = await updateAccountFunction.Run(updateAccountRequest, mock.Object, CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<OkResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
         }
-        
+
         [Test]
         [Order(4)]
         public async Task CloseAccounts_Run_Success()
@@ -125,10 +122,7 @@ namespace MyBills.Application.IntegrationTests
             var result = await getAccounts.Run(httpRequest, mock.Object, CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<OkResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
         }
 
         [Test]

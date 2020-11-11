@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.TransactionCategories.Commands.CreateTransactionCategory
 {
@@ -17,7 +17,7 @@ namespace MyBills.Application.TransactionCategories.Commands.CreateTransactionCa
 
         public async Task<long> Handle(CreateTransactionCategoryCommand request, CancellationToken cancellationToken)
         {
-            var entity = new TransactionCategory()
+            var entity = new TransactionCategory
             {
                 AccountId = request.AccountId,
                 Description = request.Description,

@@ -13,10 +13,11 @@ using Microsoft.Extensions.Primitives;
 using Moq;
 using MyBills.Api.TransactionCategories;
 using MyBills.Application.Accounts.Commands.CreateAccount;
+using MyBills.Application.IntegrationTests.Infrastructure;
 using MyBills.Application.TransactionCategories.Commands.CreateTransactionCategory;
 using MyBills.Application.TransactionCategories.Commands.UpdateTransactionCategory;
-using MyBills.Application.IntegrationTests.Infrastructure;
 using MyBills.Domain.Entities;
+using MyBills.Domain.Enums;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -30,7 +31,7 @@ namespace MyBills.Application.IntegrationTests
         {
             var testHost = new TestHost();
             _mediatorService = testHost.ServiceProvider.GetRequiredService<IMediator>();
-            await _mediatorService.Send(new CreateAccountCommand()
+            await _mediatorService.Send(new CreateAccountCommand
             {
                 Balance = 0,
                 OwnerName = "Nuno",
@@ -49,14 +50,17 @@ namespace MyBills.Application.IntegrationTests
             var createTransactionCategoryFunction = new CreateTransactionCategory(_mediatorService);
             var createTransactionCategoryRequest = new HttpRequestMessage
             {
-                Content = new StringContent(JsonConvert.SerializeObject(new CreateTransactionCategoryCommand
-                {
-                    Amount = 0
-                }), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(
+                    new CreateTransactionCategoryCommand
+                    {
+                        Description = "Example description",
+                        RecurringPeriod = RecurringPeriod.Month
+                    }), Encoding.UTF8, "application/json")
             };
 
             // act
-            var result = await createTransactionCategoryFunction.Run(createTransactionCategoryRequest, mock.Object, CancellationToken.None);
+            var result = await createTransactionCategoryFunction.Run(createTransactionCategoryRequest, mock.Object,
+                CancellationToken.None);
 
             // assert
             Assert.Multiple(() => { Assert.IsInstanceOf<BadRequestObjectResult>(result); });
@@ -73,21 +77,22 @@ namespace MyBills.Application.IntegrationTests
             {
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateTransactionCategoryCommand
                 {
-                    Amount = 3,
-                    Memo = "Groceries",
-                    CategoryId = 1,
-                    AccountId = 1
+                    Name = "Supermarket",
+                    Description = "Groceries from supermarket",
+                    AccountId = 1,
+                    RecurringPeriod = RecurringPeriod.Month
                 }), Encoding.UTF8, "application/json")
             };
 
             // act
-            var result = await createTransactionCategoryFunction.Run(createTransactionCategoryRequest, mock.Object, CancellationToken.None);
+            var result = await createTransactionCategoryFunction.Run(createTransactionCategoryRequest, mock.Object,
+                CancellationToken.None);
 
             // assert
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                Assert.AreEqual(1, ((OkObjectResult)result).Value);
+                Assert.AreEqual(1, ((OkObjectResult) result).Value);
             });
         }
 
@@ -100,22 +105,22 @@ namespace MyBills.Application.IntegrationTests
             var updateTransactionCategoryFunction = new UpdateTransactionCategory(_mediatorService);
             var updateTransactionCategoryRequest = new HttpRequestMessage
             {
-                Content = new StringContent(JsonConvert.SerializeObject(new UpdateTransactionCategoryCommand
-                {
-                    Id = 1,
-                    Memo = "Groceries",
-                    Amount = 6
-                }), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(
+                    new UpdateTransactionCategoryCommand
+                    {
+                        Id = 1,
+                        Name = "Drugs",
+                        Description = "Drug Store",
+                        RecurringPeriod = RecurringPeriod.Year
+                    }), Encoding.UTF8, "application/json")
             };
 
             // act
-            var result = await updateTransactionCategoryFunction.Run(updateTransactionCategoryRequest, mock.Object, CancellationToken.None);
+            var result = await updateTransactionCategoryFunction.Run(updateTransactionCategoryRequest, mock.Object,
+                CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<OkResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
         }
 
         [Test]
@@ -124,17 +129,14 @@ namespace MyBills.Application.IntegrationTests
         {
             // arrange
             var mock = new Mock<ILogger>();
-            var getTransactionCategories = new DeleteTransactionCategories(_mediatorService);
+            var getTransactionCategories = new DisableTransactionCategories(_mediatorService);
             var httpRequest = CreateHttpRequest("id", "1");
 
             // act
             var result = await getTransactionCategories.Run(httpRequest, mock.Object, CancellationToken.None);
 
             // assert
-            Assert.Multiple(() =>
-            {
-                Assert.IsInstanceOf<OkResult>(result);
-            });
+            Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
         }
 
         [Test]
@@ -142,24 +144,23 @@ namespace MyBills.Application.IntegrationTests
         public async Task GetTransactionCategories_Run_Success()
         {
             // arrange
-            var mock = new Mock<ILogger>();
             var getTransactionCategories = new GetTransactionCategories(_mediatorService);
             var httpRequest = CreateHttpRequest("id", "1");
 
             // act
-            var result = await getTransactionCategories.Run(httpRequest, mock.Object, CancellationToken.None);
+            var result = await getTransactionCategories.Run(httpRequest, CancellationToken.None);
 
             // assert
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                var okObjectResult = (OkObjectResult)result;
-                var bankTransactions = (List<TransactionCategory>)okObjectResult.Value;
-                Assert.IsNotNull(bankTransactions);
-                Assert.AreEqual(1, bankTransactions.Count);
-                Assert.AreEqual("Groceries", bankTransactions[0].Memo);
-                Assert.AreEqual(6.0M, bankTransactions[0].Amount);
-                Assert.AreEqual(true, bankTransactions[0].Deleted);
+                var okObjectResult = (OkObjectResult) result;
+                var transactionCategories = (List<TransactionCategory>) okObjectResult.Value;
+                Assert.IsNotNull(transactionCategories);
+                Assert.AreEqual(1, transactionCategories.Count);
+                Assert.AreEqual("Drugs", transactionCategories[0].Name);
+                Assert.AreEqual("Drug Store", transactionCategories[0].Description);
+                Assert.AreEqual(true, transactionCategories[0].Disabled);
             });
         }
 

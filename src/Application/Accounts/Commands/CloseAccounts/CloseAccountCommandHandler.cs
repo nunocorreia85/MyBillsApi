@@ -21,7 +21,8 @@ namespace MyBills.Application.Accounts.Commands.CloseAccounts
         public async Task<Unit> Handle(CloseAccountsCommand request, CancellationToken cancellationToken)
         {
             var requestIds = new object[] {request.Ids};
-            var entities = await _applicationDbContext.Accounts.Where(account => request.Ids.Contains(account.Id)).ToListAsync(cancellationToken);
+            var entities = await _applicationDbContext.Accounts.Where(account => request.Ids.Contains(account.Id))
+                .ToListAsync(cancellationToken);
 
             if (entities == null) throw new NotFoundException(nameof(Account), requestIds);
 

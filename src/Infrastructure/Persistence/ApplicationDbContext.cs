@@ -59,7 +59,7 @@ namespace MyBills.Infrastructure.Persistence
         {
             if (builder.IsConfigured) return;
 
-            if (_configuration.GetValue<bool>("Values:UseInMemoryDatabase"))
+            if (bool.TryParse(_configuration["Values:UseInMemoryDatabase"], out var useInMemDb) && useInMemDb)
                 builder.UseInMemoryDatabase("MyBillsDb");
             else
                 builder.UseSqlServer(_configuration.GetConnectionString("SqlConnectionString"),

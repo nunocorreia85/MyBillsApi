@@ -21,7 +21,7 @@ namespace MyBills.Application.Accounts.Queries.GetAccounts
         public async Task<IEnumerable<Account>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
         {
             var query = _applicationDbContext.Accounts.AsQueryable();
-            if (request.Ids.Any()) query = query.Where(account => request.Ids.Contains(account.Id) );
+            if (request.Ids.Any()) query = query.Where(account => request.Ids.Contains(account.Id));
 
             return await query.ToListAsync(cancellationToken);
         }

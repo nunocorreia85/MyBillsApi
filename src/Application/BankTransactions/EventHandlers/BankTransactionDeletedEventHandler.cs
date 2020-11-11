@@ -9,7 +9,7 @@ using MyBills.Domain.Events;
 
 namespace MyBills.Application.BankTransactions.EventHandlers
 {
-    public class BankTransactionDeletedEventHandler 
+    public class BankTransactionDeletedEventHandler
         : INotificationHandler<DomainEventNotification<BankTransactionDeletedEvent>>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -26,11 +26,11 @@ namespace MyBills.Application.BankTransactions.EventHandlers
             CancellationToken cancellationToken)
         {
             var domainEvent = notification.DomainEvent;
-            _logger.LogInformation("MyBills Domain Event: {DomainEvent} Date Occured: {dateOccured}", 
+            _logger.LogInformation("MyBills Domain Event: {DomainEvent} Date Occured: {dateOccured}",
                 domainEvent.GetType().Name, domainEvent.DateOccurred);
 
-            var account = await _dbContext.Accounts.FirstAsync(a => a.Id == domainEvent.AccountId, 
-                cancellationToken: cancellationToken);
+            var account = await _dbContext.Accounts.FirstAsync(a => a.Id == domainEvent.AccountId,
+                cancellationToken);
             account.Balance -= domainEvent.Amount;
         }
     }
