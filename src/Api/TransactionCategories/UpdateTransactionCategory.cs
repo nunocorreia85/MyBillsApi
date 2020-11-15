@@ -22,7 +22,7 @@ namespace MyBills.Api.TransactionCategories
 
         [FunctionName("UpdateTransactionCategory")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "transactioncategories")]
             HttpRequestMessage req,
             ILogger log, CancellationToken token)
         {

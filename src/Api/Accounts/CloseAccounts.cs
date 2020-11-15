@@ -23,7 +23,7 @@ namespace MyBills.Api.Accounts
 
         [FunctionName("CloseAccounts")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "accounts")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryIds(req);

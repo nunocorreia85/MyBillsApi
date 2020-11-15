@@ -21,7 +21,7 @@ namespace MyBills.Api.TransactionCategories
 
         [FunctionName("GetTransactionCategories")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "transactioncategories")]
             HttpRequest req, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryIds(req);

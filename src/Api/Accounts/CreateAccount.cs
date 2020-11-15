@@ -22,7 +22,7 @@ namespace MyBills.Api.Accounts
 
         [FunctionName("CreateAccount")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "accounts")]
             HttpRequestMessage req, ILogger log, CancellationToken token)
         {
             var command = await req.Content.ReadAsAsync<CreateAccountCommand>(token);

@@ -22,7 +22,7 @@ namespace MyBills.Api.Accounts
 
         [FunctionName("UpdateAccount")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "accounts")]
             HttpRequestMessage req, ILogger log, CancellationToken token)
         {
             var command = await req.Content.ReadAsAsync<UpdateAccountCommand>(token);

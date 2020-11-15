@@ -22,7 +22,7 @@ namespace MyBills.Api.TransactionCategories
 
         [FunctionName("CreateTransactionCategory")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "transactioncategories")]
             HttpRequestMessage req,
             ILogger log, CancellationToken token)
         {

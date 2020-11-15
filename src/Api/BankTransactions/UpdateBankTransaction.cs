@@ -22,7 +22,7 @@ namespace MyBills.Api.BankTransactions
 
         [FunctionName("UpdateBankTransaction")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "put", Route = "banktransactions")]
             HttpRequestMessage req, ILogger log, CancellationToken token)
         {
             try

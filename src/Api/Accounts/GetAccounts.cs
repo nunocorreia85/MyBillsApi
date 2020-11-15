@@ -22,7 +22,7 @@ namespace MyBills.Api.Accounts
 
         [FunctionName("GetAccounts")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "accounts")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryIds(req);

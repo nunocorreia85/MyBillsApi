@@ -22,7 +22,7 @@ namespace MyBills.Api.BankTransactions
 
         [FunctionName("CreateBankTransaction")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "banktransactions")]
             HttpRequestMessage req, ILogger log, CancellationToken token)
         {
             try

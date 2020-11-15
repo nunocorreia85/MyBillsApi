@@ -23,7 +23,7 @@ namespace MyBills.Api.TransactionCategories
 
         [FunctionName("DisableTransactionCategories")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "transactioncategories")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryIds(req);

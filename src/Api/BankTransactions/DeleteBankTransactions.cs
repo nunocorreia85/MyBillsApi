@@ -23,7 +23,7 @@ namespace MyBills.Api.BankTransactions
 
         [FunctionName("DeleteBankTransactions")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "banktransactions")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryIds(req);
