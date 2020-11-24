@@ -20,8 +20,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
             var entity = new Account
             {
                 Balance = request.Balance,
-                BankAccountNumber = request.BankAccountNumber,
-                OwnerName = request.OwnerName
+                BankAccountNumber = request.BankAccountNumber
             };
 
             await _applicationDbContext.Accounts.AddAsync(entity, cancellationToken);

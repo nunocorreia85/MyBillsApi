@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyBills.Infrastructure.Persistence.Migrations
 {
     [ExcludeFromCodeCoverage]
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                "Account",
-                table => new
+                name: "Account",
+                columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -19,16 +19,19 @@ namespace MyBills.Infrastructure.Persistence.Migrations
                     CreatedBy = table.Column<string>(nullable: true),
                     LastModified = table.Column<DateTime>(nullable: true),
                     LastModifiedBy = table.Column<string>(nullable: true),
-                    OwnerName = table.Column<string>(maxLength: 200, nullable: false),
+                    ExternalId = table.Column<Guid>(maxLength: 200, nullable: false),
                     Balance = table.Column<decimal>(nullable: false),
-                    BankAccountNumber = table.Column<string>(nullable: true),
+                    BankAccountNumber = table.Column<string>(maxLength: 200, nullable: false),
                     Closed = table.Column<bool>(nullable: false)
                 },
-                constraints: table => { table.PrimaryKey("PK_Account", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Account", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
-                "TransactionCategory",
-                table => new
+                name: "TransactionCategory",
+                columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -39,22 +42,23 @@ namespace MyBills.Infrastructure.Persistence.Migrations
                     Name = table.Column<string>(maxLength: 200, nullable: false),
                     Description = table.Column<string>(nullable: true),
                     RecurringPeriod = table.Column<int>(nullable: true),
-                    AccountId = table.Column<long>(nullable: false)
+                    AccountId = table.Column<long>(nullable: false),
+                    Disabled = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TransactionCategory", x => x.Id);
                     table.ForeignKey(
-                        "FK_TransactionCategory_Account_AccountId",
-                        x => x.AccountId,
-                        "Account",
-                        "Id",
+                        name: "FK_TransactionCategory_Account_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Account",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "BankTransaction",
-                table => new
+                name: "BankTransaction",
+                columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -73,45 +77,45 @@ namespace MyBills.Infrastructure.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_BankTransaction", x => x.Id);
                     table.ForeignKey(
-                        "FK_BankTransaction_Account_AccountId",
-                        x => x.AccountId,
-                        "Account",
-                        "Id",
+                        name: "FK_BankTransaction_Account_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "Account",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        "FK_BankTransaction_TransactionCategory_TransactionCategoryId",
-                        x => x.TransactionCategoryId,
-                        "TransactionCategory",
-                        "Id",
+                        name: "FK_BankTransaction_TransactionCategory_TransactionCategoryId",
+                        column: x => x.TransactionCategoryId,
+                        principalTable: "TransactionCategory",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                "IX_BankTransaction_AccountId",
-                "BankTransaction",
-                "AccountId");
+                name: "IX_BankTransaction_AccountId",
+                table: "BankTransaction",
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
-                "IX_BankTransaction_TransactionCategoryId",
-                "BankTransaction",
-                "TransactionCategoryId");
+                name: "IX_BankTransaction_TransactionCategoryId",
+                table: "BankTransaction",
+                column: "TransactionCategoryId");
 
             migrationBuilder.CreateIndex(
-                "IX_TransactionCategory_AccountId",
-                "TransactionCategory",
-                "AccountId");
+                name: "IX_TransactionCategory_AccountId",
+                table: "TransactionCategory",
+                column: "AccountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                "BankTransaction");
+                name: "BankTransaction");
 
             migrationBuilder.DropTable(
-                "TransactionCategory");
+                name: "TransactionCategory");
 
             migrationBuilder.DropTable(
-                "Account");
+                name: "Account");
         }
     }
 }

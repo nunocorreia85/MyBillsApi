@@ -9,7 +9,10 @@ namespace MyBills.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Account> builder)
         {
             builder.ToTable(nameof(Account));
-            builder.Property(t => t.OwnerName)
+            builder.Property(t => t.ExternalId)
+                .HasMaxLength(200)
+                .IsRequired();
+            builder.Property(t => t.BankAccountNumber)
                 .HasMaxLength(200)
                 .IsRequired();
         }

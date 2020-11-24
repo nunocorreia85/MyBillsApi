@@ -45,7 +45,7 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
-                    OwnerName = "Joao",
+                    ExternalId = "Joao",
                     BankAccountNumber = "123445544"
                 }), Encoding.UTF8, "application/json")
             };
@@ -69,7 +69,7 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
-                    OwnerName = "Joao",
+                    ExternalId = "Joao",
                     BankAccountNumber = "DE89370400440532013000"
                 }), Encoding.UTF8, "application/json")
             };
@@ -97,7 +97,6 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new UpdateAccountCommand
                 {
                     Id = 1,
-                    OwnerName = "Joao",
                     BankAccountNumber = "CH9300762011623852957"
                 }), Encoding.UTF8, "application/json")
             };

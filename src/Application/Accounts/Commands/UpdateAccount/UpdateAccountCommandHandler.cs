@@ -22,8 +22,7 @@ namespace MyBills.Application.Accounts.Commands.UpdateAccount
             var entity = await _applicationDbContext.Accounts.FindAsync(requestIds, cancellationToken);
 
             if (entity == null) throw new NotFoundException(nameof(Account), requestIds);
-
-            entity.OwnerName = request.OwnerName;
+            
             entity.BankAccountNumber = request.BankAccountNumber;
 
             await _applicationDbContext.SaveChangesAsync(cancellationToken);

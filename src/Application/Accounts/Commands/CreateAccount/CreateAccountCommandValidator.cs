@@ -11,7 +11,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
             var ibanValidator = new IbanValidator();
             RuleFor(v => v.BankAccountNumber)
                 .Iban(ibanValidator);
-            RuleFor(v => v.OwnerName)
+            RuleFor(v => v.ExternalId)
                 .NotEmpty();
         }
     }

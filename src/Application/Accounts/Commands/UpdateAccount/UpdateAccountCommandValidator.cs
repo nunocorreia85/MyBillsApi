@@ -11,8 +11,6 @@ namespace MyBills.Application.Accounts.Commands.UpdateAccount
             var ibanValidator = new IbanValidator();
             RuleFor(v => v.BankAccountNumber)
                 .Iban(ibanValidator);
-            RuleFor(v => v.OwnerName)
-                .NotEmpty();
         }
     }
 }
