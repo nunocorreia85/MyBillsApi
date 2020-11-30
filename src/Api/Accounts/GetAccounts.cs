@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -25,10 +27,12 @@ namespace MyBills.Api.Accounts
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "accounts")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
-            var ids = HttpRequestUtils.GetQueryIds(req);
+            var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
+            var externalIds = HttpRequestUtils.GetQueryKeyValues<string>(req, "externalIds");
             var accounts = await _mediator.Send(
                 new GetAccountsQuery
                 {
+                    ExternalIds = externalIds.Select(externalId => new Guid(externalId)).ToList(),
                     Ids = ids
                 }, token);
             return new OkObjectResult(accounts);

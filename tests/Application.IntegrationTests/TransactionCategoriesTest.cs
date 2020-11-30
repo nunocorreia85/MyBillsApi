@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -34,7 +35,7 @@ namespace MyBills.Application.IntegrationTests
             await _mediatorService.Send(new CreateAccountCommand
             {
                 Balance = 0,
-                ExternalId = "Nuno",
+                ExternalId = Guid.NewGuid(),
                 BankAccountNumber = "DE89370400440532013000"
             });
         }

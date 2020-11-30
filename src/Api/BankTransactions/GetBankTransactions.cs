@@ -25,7 +25,7 @@ namespace MyBills.Api.BankTransactions
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "banktransactions")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
-            var ids = HttpRequestUtils.GetQueryIds(req);
+            var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
             var bankTransactions = await _mediator.Send(
                 new GetBankTransactionsQuery
                 {

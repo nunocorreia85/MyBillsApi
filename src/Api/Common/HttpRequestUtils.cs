@@ -1,19 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 
 namespace MyBills.Api.Common
 {
     public static class HttpRequestUtils
     {
-        public static List<long> GetQueryIds(HttpRequest req)
+        public static List<T> GetQueryKeyValues<T>(HttpRequest req, string queryKeyName)
+            where T : IConvertible
         {
-            var values = req.Query["id"];
-            var ids = new List<long>();
-            foreach (var value in values)
-                if (long.TryParse(value, out var id))
-                    ids.Add(id);
-
-            return ids;
+            var values = req.Query[queryKeyName];
+            return values.Select(value => (T) Convert.ChangeType(value, typeof(T))).ToList();
         }
     }
 }

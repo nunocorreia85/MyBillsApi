@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -29,9 +30,11 @@ namespace MyBills.Application.IntegrationTests
         {
             var testHost = new TestHost();
             _mediatorService = testHost.ServiceProvider.GetRequiredService<IMediator>();
+            externalId = Guid.NewGuid();
         }
 
         private IMediator _mediatorService;
+        private Guid externalId;
 
         [Test]
         [Order(1)]
@@ -45,7 +48,7 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
-                    ExternalId = "Joao",
+                    ExternalId = externalId,
                     BankAccountNumber = "123445544"
                 }), Encoding.UTF8, "application/json")
             };
@@ -69,7 +72,7 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
-                    ExternalId = "Joao",
+                    ExternalId = externalId,
                     BankAccountNumber = "DE89370400440532013000"
                 }), Encoding.UTF8, "application/json")
             };
@@ -147,6 +150,7 @@ namespace MyBills.Application.IntegrationTests
                 Assert.AreEqual("CH9300762011623852957", accounts[0].BankAccountNumber);
                 Assert.AreEqual(3.0M, accounts[0].Balance);
                 Assert.AreEqual(true, accounts[0].Closed);
+                Assert.AreEqual(externalId, accounts[0].ExternalId);
             });
         }
 

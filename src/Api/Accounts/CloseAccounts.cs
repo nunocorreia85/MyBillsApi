@@ -26,7 +26,7 @@ namespace MyBills.Api.Accounts
             [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "accounts")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
-            var ids = HttpRequestUtils.GetQueryIds(req);
+            var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
             try
             {
                 await _mediator.Send(new CloseAccountsCommand

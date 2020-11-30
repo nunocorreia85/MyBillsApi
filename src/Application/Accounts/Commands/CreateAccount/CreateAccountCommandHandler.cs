@@ -19,6 +19,7 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
         {
             var entity = new Account
             {
+                ExternalId = request.ExternalId,
                 Balance = request.Balance,
                 BankAccountNumber = request.BankAccountNumber
             };

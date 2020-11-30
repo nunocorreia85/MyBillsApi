@@ -26,7 +26,7 @@ namespace MyBills.Api.TransactionCategories
             [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "transactioncategories")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
-            var ids = HttpRequestUtils.GetQueryIds(req);
+            var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
             try
             {
                 await _mediator.Send(new DisableTransactionCategoriesCommand

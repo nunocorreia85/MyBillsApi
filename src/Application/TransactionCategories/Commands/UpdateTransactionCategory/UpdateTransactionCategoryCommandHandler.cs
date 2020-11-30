@@ -23,7 +23,7 @@ namespace MyBills.Application.TransactionCategories.Commands.UpdateTransactionCa
             entity.Description = request.Description;
             entity.Name = request.Name;
             entity.RecurringPeriod = request.RecurringPeriod;
-            
+
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return entity.Id;

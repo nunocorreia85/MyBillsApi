@@ -8,8 +8,10 @@ Guide manual:
 In powershell run the following:
 
 Set environment variable:
-
 - $env:SqlConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=mybillsdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+
+Install entity framework tool for migrations:
+- dotnet tool install --global dotnet-ef
 
 update database:
 - dotnet ef database update -p src\Infrastructure -s src\Api
