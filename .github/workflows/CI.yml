@@ -36,19 +36,19 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ./tests/TestResults/coverage.info       
     
-    - name: 'Publish Application'
+    - name: 'Pack Application'
       run: dotnet pack src/Application -c Release
     
-    - name: 'Publish Application'
-      run: dotnet nuget push "src/Application/bin/Release/Application*.nupkg" --source "github" -k ${GITHUB_TOKEN}
+    - name: 'Nuget push Application'
+      run: dotnet nuget push "src/Application/bin/Release/MyBills.Application*.nupkg" --source "github" -k ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
-    - name: 'Publish Domain'
+    - name: 'Pack Domain'
       run: dotnet pack src/Domain -c Release
     
-    - name: 'Publish Domain'
-      run: dotnet nuget push "src/Application/bin/Release/Domain*.nupkg" --source "github" -k ${GITHUB_TOKEN}
+    - name: 'Nuget push Domain'
+      run: dotnet nuget push "src/Application/bin/Release/MyBills.Domain*.nupkg" --source "github" -k ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
