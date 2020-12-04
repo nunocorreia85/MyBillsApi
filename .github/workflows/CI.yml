@@ -48,7 +48,7 @@ jobs:
       run: dotnet pack src/Domain -c Release
     
     - name: 'Nuget push Domain'
-      run: dotnet nuget push "src/Application/bin/Release/MyBills.Domain*.nupkg" --source "https://nuget.pkg.github.com/nunocorreia85/index.json" -k ${GITHUB_TOKEN}
+      run: dotnet nuget push "src/Domain/bin/Release/MyBills.Domain*.nupkg" --source "https://nuget.pkg.github.com/nunocorreia85/index.json" -k ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
