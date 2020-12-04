@@ -4,6 +4,7 @@
 		<AssemblyName>MyBills.Application</AssemblyName>
 		<RootNamespace>MyBills.Application</RootNamespace>
 		<LangVersion>8</LangVersion>
+		<RepositoryUrl>https://github.com/nunocorreia85/MyBillsApi</RepositoryUrl>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Domain\Domain.csproj" />

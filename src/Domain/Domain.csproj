@@ -5,6 +5,7 @@
     <AssemblyName>MyBills.Domain</AssemblyName>
     <RootNamespace>MyBills.Domain</RootNamespace>
     <LangVersion>8</LangVersion>
+    <RepositoryUrl>https://github.com/nunocorreia85/MyBillsApi</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
