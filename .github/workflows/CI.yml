@@ -40,7 +40,7 @@ jobs:
       run: dotnet pack src/Application -c Release
     
     - name: 'Publish Application'
-      run: dotnet nuget push "bin/Release/Application*.nupkg" --source "github" -k ${GITHUB_TOKEN}
+      run: dotnet nuget push "src/Application/bin/Release/Application*.nupkg" --source "github" -k ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
@@ -48,7 +48,7 @@ jobs:
       run: dotnet pack src/Domain -c Release
     
     - name: 'Publish Domain'
-      run: dotnet nuget push "bin/Release/Domain*.nupkg" --source "github" -k ${GITHUB_TOKEN}
+      run: dotnet nuget push "src/Application/bin/Release/Domain*.nupkg" --source "github" -k ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
