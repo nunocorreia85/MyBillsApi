@@ -2,6 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <AssemblyName>MyBills.Application.Shared</AssemblyName>
+        <RootNamespace>MyBills.Application.Shared</RootNamespace>
+        <LangVersion>8</LangVersion>
+        <RepositoryUrl>https://github.com/nunocorreia85/MyBillsApi</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
