@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using MyBills.Application.Common.Interfaces;
+using MyBills.Application.Shared.Accounts.Commands.CreateAccount;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Commands.CreateAccount

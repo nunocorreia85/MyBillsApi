@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace MyBills.Application.Accounts.Commands.CreateAccount
+namespace MyBills.Application.Shared.Accounts.Commands.CreateAccount
 {
     public class CreateAccountCommand : IRequest<long>
     {

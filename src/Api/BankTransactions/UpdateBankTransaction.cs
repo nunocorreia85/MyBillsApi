@@ -8,6 +8,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Application.BankTransactions.Commands.UpdateBankTransaction;
+using MyBills.Application.Shared.BankTransactions.Commands.UpdateBankTransaction;
 
 namespace MyBills.Api.BankTransactions
 {

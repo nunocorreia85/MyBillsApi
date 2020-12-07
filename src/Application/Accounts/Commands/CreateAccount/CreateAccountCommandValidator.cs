@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using IbanNet;
 using IbanNet.FluentValidation;
+using MyBills.Application.Shared.Accounts.Commands.CreateAccount;
 
 namespace MyBills.Application.Accounts.Commands.CreateAccount
 {

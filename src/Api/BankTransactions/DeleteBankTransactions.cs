@@ -9,6 +9,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
 using MyBills.Application.BankTransactions.Commands.DeleteBankTransactions;
+using MyBills.Application.Shared.BankTransactions.Commands.DeleteBankTransactions;
 
 namespace MyBills.Api.BankTransactions
 {

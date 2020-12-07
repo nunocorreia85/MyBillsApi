@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using MyBills.Domain.Enums;
 
-namespace MyBills.Application.TransactionCategories.Commands.UpdateTransactionCategory
+namespace MyBills.Application.Shared.TransactionCategories.Commands.UpdateTransactionCategory
 {
     public class UpdateTransactionCategoryCommand : IRequest<long>
     {

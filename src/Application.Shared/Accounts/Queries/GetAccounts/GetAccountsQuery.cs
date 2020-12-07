@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MediatR;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.Accounts.Queries.GetAccounts
+namespace MyBills.Application.Shared.Accounts.Queries.GetAccounts
 {
     public class GetAccountsQuery : IRequest<IEnumerable<Account>>
     {

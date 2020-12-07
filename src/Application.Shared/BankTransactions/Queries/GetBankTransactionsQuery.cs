@@ -2,7 +2,7 @@
 using MediatR;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.BankTransactions.Queries
+namespace MyBills.Application.Shared.BankTransactions.Queries
 {
     public class GetBankTransactionsQuery : IRequest<IEnumerable<BankTransaction>>
     {

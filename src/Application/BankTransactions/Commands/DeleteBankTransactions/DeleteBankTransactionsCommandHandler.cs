@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
+using MyBills.Application.Shared.BankTransactions.Commands.DeleteBankTransactions;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransactions

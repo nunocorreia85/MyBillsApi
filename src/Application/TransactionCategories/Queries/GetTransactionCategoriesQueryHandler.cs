@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Interfaces;
+using MyBills.Application.Shared.TransactionCategories.Queries;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.TransactionCategories.Queries

@@ -8,6 +8,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
 using MyBills.Application.BankTransactions.Queries;
+using MyBills.Application.Shared.BankTransactions.Queries;
 
 namespace MyBills.Api.BankTransactions
 {

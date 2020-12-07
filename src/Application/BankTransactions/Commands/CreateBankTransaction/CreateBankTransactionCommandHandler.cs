@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using MyBills.Application.Common.Interfaces;
+using MyBills.Application.Shared.BankTransactions.Commands.CreateBankTransaction;
 using MyBills.Domain.Entities;
 using MyBills.Domain.Events;
 

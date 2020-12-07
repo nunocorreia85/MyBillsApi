@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using MyBills.Application.Common.Interfaces;
+using MyBills.Application.Shared.TransactionCategories.Commands.CreateTransactionCategory;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.TransactionCategories.Commands.CreateTransactionCategory

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using MyBills.Api.Common;
+using MyBills.Application.Shared.TransactionCategories.Queries;
 using MyBills.Application.TransactionCategories.Queries;
 
 namespace MyBills.Api.TransactionCategories

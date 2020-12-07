@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
+namespace MyBills.Application.Shared.BankTransactions.Commands.CreateBankTransaction
 {
     public class CreateBankTransactionCommand : IRequest<long>
     {

@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
+using MyBills.Application.Shared.Accounts.Commands.CloseAccounts;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Commands.CloseAccounts

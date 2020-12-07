@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
 using MyBills.Application.Accounts.Commands.CloseAccounts;
 using MyBills.Application.Common.Exceptions;
+using MyBills.Application.Shared.Accounts.Commands.CloseAccounts;
 
 namespace MyBills.Api.Accounts
 {

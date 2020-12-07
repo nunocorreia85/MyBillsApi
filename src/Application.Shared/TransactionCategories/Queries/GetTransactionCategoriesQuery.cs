@@ -2,7 +2,7 @@
 using MediatR;
 using MyBills.Domain.Entities;
 
-namespace MyBills.Application.TransactionCategories.Queries
+namespace MyBills.Application.Shared.TransactionCategories.Queries
 {
     public class GetTransactionCategoriesQuery : IRequest<IEnumerable<TransactionCategory>>
     {

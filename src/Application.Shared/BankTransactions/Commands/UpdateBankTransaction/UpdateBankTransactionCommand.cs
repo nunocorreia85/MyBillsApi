@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace MyBills.Application.BankTransactions.Commands.UpdateBankTransaction
+namespace MyBills.Application.Shared.BankTransactions.Commands.UpdateBankTransaction
 {
     public class UpdateBankTransactionCommand : IRequest
     {
