@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,10 @@ namespace MyBills.Api.Accounts
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "accounts")]
             HttpRequest req, ILogger log, CancellationToken token)
         {
+            // JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            // var securityToken = handler.ReadToken(req.Headers["Authorization"][0].Replace("Bearer ", ""));
+            
+            
             var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
             var externalIds = HttpRequestUtils.GetQueryKeyValues<string>(req, "externalId");
             var accounts = await _mediator.Send(
