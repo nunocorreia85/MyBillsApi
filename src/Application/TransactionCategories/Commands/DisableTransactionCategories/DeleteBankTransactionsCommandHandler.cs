@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
-using MyBills.Application.Shared.TransactionCategories.Commands.DisableTransactionCategories;
+using MyBills.Application.Shared.TransactionCategories.Commands;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.TransactionCategories.Commands.DisableTransactionCategories

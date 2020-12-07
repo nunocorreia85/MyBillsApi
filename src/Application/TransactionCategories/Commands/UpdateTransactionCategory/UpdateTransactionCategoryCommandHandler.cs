@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Interfaces;
-using MyBills.Application.Shared.TransactionCategories.Commands.UpdateTransactionCategory;
+using MyBills.Application.Shared.TransactionCategories.Commands;
 
 namespace MyBills.Application.TransactionCategories.Commands.UpdateTransactionCategory
 {

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
-using MyBills.Application.Shared.BankTransactions.Commands.UpdateBankTransaction;
+using MyBills.Application.Shared.BankTransactions.Commands;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.BankTransactions.Commands.UpdateBankTransaction

@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using MyBills.Domain.Enums;
 
-namespace MyBills.Application.Shared.TransactionCategories.Commands.CreateTransactionCategory
+namespace MyBills.Application.Shared.TransactionCategories.Commands
 {
-    public class CreateTransactionCategoryCommand : IRequest<long>
+    public class UpdateTransactionCategoryCommand : IRequest<long>
     {
-        public long AccountId { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public RecurringPeriod? RecurringPeriod { get; set; }
+        public long Id { get; set; }
     }
 }

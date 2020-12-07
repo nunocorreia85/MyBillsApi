@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using IbanNet;
 using IbanNet.FluentValidation;
-using MyBills.Application.Shared.Accounts.Commands.UpdateAccount;
+using MyBills.Application.Shared.Accounts.Commands;
 
 namespace MyBills.Application.Accounts.Commands.UpdateAccount
 {

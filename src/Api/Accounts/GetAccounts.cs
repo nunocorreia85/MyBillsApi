@@ -10,7 +10,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
 using MyBills.Application.Accounts.Queries.GetAccounts;
-using MyBills.Application.Shared.Accounts.Queries.GetAccounts;
+using MyBills.Application.Shared.Accounts.Queries;
 
 namespace MyBills.Api.Accounts
 {
@@ -29,7 +29,7 @@ namespace MyBills.Api.Accounts
             HttpRequest req, ILogger log, CancellationToken token)
         {
             var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
-            var externalIds = HttpRequestUtils.GetQueryKeyValues<string>(req, "externalIds");
+            var externalIds = HttpRequestUtils.GetQueryKeyValues<string>(req, "externalId");
             var accounts = await _mediator.Send(
                 new GetAccountsQuery
                 {

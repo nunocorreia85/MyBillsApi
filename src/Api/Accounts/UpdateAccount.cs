@@ -8,7 +8,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Application.Accounts.Commands.UpdateAccount;
 using MyBills.Application.Common.Exceptions;
-using MyBills.Application.Shared.Accounts.Commands.UpdateAccount;
+using MyBills.Application.Shared.Accounts.Commands;
 
 namespace MyBills.Api.Accounts
 {

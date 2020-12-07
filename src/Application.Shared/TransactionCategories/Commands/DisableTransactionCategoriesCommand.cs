@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace MyBills.Application.Shared.TransactionCategories.Commands.DisableTransactionCategories
+namespace MyBills.Application.Shared.TransactionCategories.Commands
 {
     public class DisableTransactionCategoriesCommand : IRequest
     {

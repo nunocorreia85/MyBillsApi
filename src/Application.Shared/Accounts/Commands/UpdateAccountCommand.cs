@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MyBills.Application.Shared.Accounts.Commands.UpdateAccount
+namespace MyBills.Application.Shared.Accounts.Commands
 {
     public class UpdateAccountCommand : IRequest
     {

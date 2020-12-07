@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using MyBills.Application.Shared.TransactionCategories.Commands.CreateTransactionCategory;
+using MyBills.Application.Shared.TransactionCategories.Commands;
 
 namespace MyBills.Application.TransactionCategories.Commands.CreateTransactionCategory
 {

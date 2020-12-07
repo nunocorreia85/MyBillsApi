@@ -8,7 +8,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
-using MyBills.Application.Shared.TransactionCategories.Commands.DisableTransactionCategories;
+using MyBills.Application.Shared.TransactionCategories.Commands;
 using MyBills.Application.TransactionCategories.Commands.DisableTransactionCategories;
 
 namespace MyBills.Api.TransactionCategories

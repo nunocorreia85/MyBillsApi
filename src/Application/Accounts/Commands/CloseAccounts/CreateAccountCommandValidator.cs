@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using MyBills.Application.Shared.Accounts.Commands.CloseAccounts;
+using MyBills.Application.Shared.Accounts.Commands;
 
 namespace MyBills.Application.Accounts.Commands.CloseAccounts
 {

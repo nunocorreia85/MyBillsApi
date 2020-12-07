@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Interfaces;
-using MyBills.Application.Shared.Accounts.Queries.GetAccounts;
+using MyBills.Application.Shared.Accounts.Queries;
 using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Queries.GetAccounts

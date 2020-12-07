@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace MyBills.Application.Shared.BankTransactions.Commands.DeleteBankTransactions
+namespace MyBills.Application.Shared.BankTransactions.Commands
 {
     public class DeleteBankTransactionsCommand : IRequest
     {

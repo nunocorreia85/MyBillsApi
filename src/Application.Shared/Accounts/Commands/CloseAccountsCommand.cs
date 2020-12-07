@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MediatR;
 
-namespace MyBills.Application.Shared.Accounts.Commands.CloseAccounts
+namespace MyBills.Application.Shared.Accounts.Commands
 {
     public class CloseAccountsCommand : IRequest
     {

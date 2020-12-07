@@ -1,5 +1,5 @@
 using FluentValidation;
-using MyBills.Application.Shared.BankTransactions.Commands.UpdateBankTransaction;
+using MyBills.Application.Shared.BankTransactions.Commands;
 
 namespace MyBills.Application.BankTransactions.Commands.UpdateBankTransaction
 {

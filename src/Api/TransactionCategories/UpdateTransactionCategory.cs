@@ -7,7 +7,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Application.Common.Exceptions;
-using MyBills.Application.Shared.TransactionCategories.Commands.UpdateTransactionCategory;
+using MyBills.Application.Shared.TransactionCategories.Commands;
 using MyBills.Application.TransactionCategories.Commands.UpdateTransactionCategory;
 
 namespace MyBills.Api.TransactionCategories
