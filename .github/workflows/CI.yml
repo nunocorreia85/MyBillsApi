@@ -37,10 +37,10 @@ jobs:
         path-to-lcov: ./tests/TestResults/coverage.info       
     
     - name: 'Pack Application'
-      run: dotnet pack src/Application -c Release
+      run: dotnet pack src/Application.Shared -c Release
     
     - name: 'Nuget push Application'
-      run: dotnet nuget push "src/Application/bin/Release/MyBills.Application*.nupkg" --source "https://nuget.pkg.github.com/nunocorreia85/index.json" -k ${GITHUB_TOKEN} --skip-duplicate
+      run: dotnet nuget push "src/Application/bin/Release/MyBills.Application.Shared*.nupkg" --source "https://nuget.pkg.github.com/nunocorreia85/index.json" -k ${GITHUB_TOKEN} --skip-duplicate
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
