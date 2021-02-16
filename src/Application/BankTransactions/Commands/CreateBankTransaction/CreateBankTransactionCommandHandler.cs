@@ -1,10 +1,10 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.BankTransactions.Commands;
 using MyBills.Domain.Entities;
 using MyBills.Domain.Events;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBills.Application.BankTransactions.Commands.CreateBankTransaction
 {

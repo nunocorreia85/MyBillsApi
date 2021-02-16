@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using MyBills.Domain.Common;
+﻿using MyBills.Domain.Common;
 using MyBills.Domain.Events;
+using System.Collections.Generic;
 
 namespace MyBills.Domain.Entities
 {

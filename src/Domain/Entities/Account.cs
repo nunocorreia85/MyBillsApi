@@ -1,5 +1,5 @@
-﻿using System;
-using MyBills.Domain.Common;
+﻿using MyBills.Domain.Common;
+using System;
 
 namespace MyBills.Domain.Entities
 {

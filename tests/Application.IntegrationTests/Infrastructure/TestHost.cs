@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
-using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using MyBills.Api;
+using System;
+using System.IO;
 
 namespace MyBills.Application.IntegrationTests.Infrastructure
 {

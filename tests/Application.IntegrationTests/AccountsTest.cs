@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +7,17 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using MyBills.Api.Accounts;
-using MyBills.Application.Accounts.Commands.CreateAccount;
-using MyBills.Application.Accounts.Commands.UpdateAccount;
 using MyBills.Application.IntegrationTests.Infrastructure;
 using MyBills.Application.Shared.Accounts.Commands;
 using MyBills.Domain.Entities;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBills.Application.IntegrationTests
 {
@@ -85,7 +83,7 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                Assert.AreEqual(1, ((OkObjectResult) result).Value);
+                Assert.AreEqual(1, ((OkObjectResult)result).Value);
             });
         }
 
@@ -144,8 +142,8 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                var okObjectResult = (OkObjectResult) result;
-                var accounts = (List<Account>) okObjectResult.Value;
+                var okObjectResult = (OkObjectResult)result;
+                var accounts = (List<Account>)okObjectResult.Value;
                 Assert.IsNotNull(accounts);
                 Assert.AreEqual(1, accounts.Count);
                 Assert.AreEqual("CH9300762011623852957", accounts[0].BankAccountNumber);

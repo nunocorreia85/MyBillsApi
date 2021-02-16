@@ -1,11 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Common.Models;
 using MyBills.Domain.Events;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBills.Application.BankTransactions.EventHandlers
 {

@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
 using MyBills.Application.Shared.TransactionCategories.Commands;
-using MyBills.Application.TransactionCategories.Commands.DisableTransactionCategories;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBills.Api.TransactionCategories
 {

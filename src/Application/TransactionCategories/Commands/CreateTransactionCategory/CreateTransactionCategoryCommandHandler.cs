@@ -1,9 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.TransactionCategories.Commands;
 using MyBills.Domain.Entities;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBills.Application.TransactionCategories.Commands.CreateTransactionCategory
 {

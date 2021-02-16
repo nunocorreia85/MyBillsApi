@@ -1,7 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Linq;
 using System.Reflection;
-using AutoMapper;
 
 namespace MyBills.Application.Common.Mappings
 {
@@ -26,7 +26,7 @@ namespace MyBills.Application.Common.Mappings
                 var methodInfo = type.GetMethod("Mapping")
                                  ?? type.GetInterface("IMapFrom`1").GetMethod("Mapping");
 
-                methodInfo?.Invoke(instance, new object[] {this});
+                methodInfo?.Invoke(instance, new object[] { this });
             }
         }
     }

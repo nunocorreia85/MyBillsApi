@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.Accounts.Commands;
 using MyBills.Domain.Entities;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBills.Application.Accounts.Commands.CloseAccounts
 {
@@ -21,7 +21,7 @@ namespace MyBills.Application.Accounts.Commands.CloseAccounts
 
         public async Task<Unit> Handle(CloseAccountsCommand request, CancellationToken cancellationToken)
         {
-            var requestIds = new object[] {request.Ids};
+            var requestIds = new object[] { request.Ids };
             var entities = await _applicationDbContext.Accounts.Where(account => request.Ids.Contains(account.Id))
                 .ToListAsync(cancellationToken);
 

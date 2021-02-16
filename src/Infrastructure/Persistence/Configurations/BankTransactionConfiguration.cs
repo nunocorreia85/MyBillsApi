@@ -15,6 +15,9 @@ namespace MyBills.Infrastructure.Persistence.Configurations
             builder.Property(t => t.Memo)
                 .HasMaxLength(200)
                 .IsRequired();
+
+            builder.Property(t => t.Amount)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Threading;
+﻿using MyBills.Domain.Common;
+using System.Threading;
 using System.Threading.Tasks;
-using MyBills.Domain.Common;
 
 namespace MyBills.Application.Common.Interfaces
 {

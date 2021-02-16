@@ -1,8 +1,8 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using MyBills.Infrastructure.Persistence;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MyBills.Infrastructure
 {

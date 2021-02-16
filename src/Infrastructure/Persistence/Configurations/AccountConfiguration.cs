@@ -15,6 +15,8 @@ namespace MyBills.Infrastructure.Persistence.Configurations
             builder.Property(t => t.BankAccountNumber)
                 .HasMaxLength(200)
                 .IsRequired();
+            builder.Property(t => t.Balance)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }
