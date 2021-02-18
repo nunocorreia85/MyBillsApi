@@ -1,12 +1,12 @@
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.BankTransactions.Commands;
 using MyBills.Domain.Entities;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransactions
 {
@@ -26,7 +26,9 @@ namespace MyBills.Application.BankTransactions.Commands.DeleteBankTransactions
                 .ToListAsync(cancellationToken);
 
             if (transactions == null)
+            {
                 throw new NotFoundException(nameof(BankTransaction), string.Join(",", request.Ids));
+            }
 
             transactions.ForEach(transaction => transaction.Deleted = true);
 

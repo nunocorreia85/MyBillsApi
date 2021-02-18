@@ -1,12 +1,12 @@
-﻿using MediatR;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.Accounts.Queries;
 using MyBills.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.Accounts.Queries.GetAccounts
 {
@@ -23,9 +23,14 @@ namespace MyBills.Application.Accounts.Queries.GetAccounts
         {
             var query = _applicationDbContext.Accounts.AsQueryable();
             if (request.ExternalIds.Any())
+            {
                 query = query.Where(account => request.ExternalIds.Contains(account.ExternalId));
+            }
+
             if (request.Ids.Any())
+            {
                 query = query.Where(account => request.Ids.Contains(account.Id));
+            }
 
             return await query.ToListAsync(cancellationToken);
         }

@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MyBills.Application.Common.Behaviours;
-using System.Reflection;
 
 namespace MyBills.Application
 {

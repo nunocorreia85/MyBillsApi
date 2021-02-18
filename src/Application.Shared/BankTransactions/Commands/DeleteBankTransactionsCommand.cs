@@ -1,5 +1,5 @@
-using MediatR;
 using System.Collections.Generic;
+using MediatR;
 
 namespace MyBills.Application.Shared.BankTransactions.Commands
 {

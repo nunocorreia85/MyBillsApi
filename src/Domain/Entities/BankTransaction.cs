@@ -1,6 +1,6 @@
-﻿using MyBills.Domain.Common;
+﻿using System.Collections.Generic;
+using MyBills.Domain.Common;
 using MyBills.Domain.Events;
-using System.Collections.Generic;
 
 namespace MyBills.Domain.Entities
 {
@@ -20,7 +20,11 @@ namespace MyBills.Domain.Entities
             get => _deleted;
             set
             {
-                if (value && _deleted == false) DomainEvents.Add(new BankTransactionDeletedEvent(this));
+                if (value && _deleted == false)
+                {
+                    DomainEvents.Add(new BankTransactionDeletedEvent(this));
+                }
+
                 _deleted = value;
             }
         }

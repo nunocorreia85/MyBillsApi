@@ -1,13 +1,13 @@
-﻿using MediatR;
+﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Shared.BankTransactions.Commands;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Api.BankTransactions
 {

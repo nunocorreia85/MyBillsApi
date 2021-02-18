@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Domain.Common;
 using MyBills.Domain.Entities;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Infrastructure.Persistence
 {
@@ -34,6 +34,7 @@ namespace MyBills.Infrastructure.Persistence
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -47,6 +48,7 @@ namespace MyBills.Infrastructure.Persistence
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
+            }
 
             var result = await base.SaveChangesAsync(cancellationToken);
 
@@ -57,13 +59,20 @@ namespace MyBills.Infrastructure.Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            if (builder.IsConfigured) return;
+            if (builder.IsConfigured)
+            {
+                return;
+            }
 
             if (bool.TryParse(_configuration["Values:UseInMemoryDatabase"], out var useInMemDb) && useInMemDb)
+            {
                 builder.UseInMemoryDatabase("MyBillsDb");
+            }
             else
+            {
                 builder.UseSqlServer(_configuration.GetConnectionString("SqlConnectionString"),
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -81,7 +90,9 @@ namespace MyBills.Infrastructure.Persistence
                 .ToArray();
 
             foreach (var domainEvent in domainEventEntities)
+            {
                 await _domainEventService.PublishAsync(domainEvent, cancellationToken);
+            }
         }
     }
 }

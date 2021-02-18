@@ -1,5 +1,5 @@
-﻿using MyBills.Domain.Common;
-using System;
+﻿using System;
+using MyBills.Domain.Common;
 
 namespace MyBills.Domain.Entities
 {
@@ -9,5 +9,9 @@ namespace MyBills.Domain.Entities
         public decimal Balance { get; set; }
         public string BankAccountNumber { get; set; }
         public bool Closed { get; set; }
+        public string Email { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
     }
 }

@@ -9,7 +9,7 @@
     "SqlConnectionString": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=mybillsdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
   },
   "Host": {
-    "LocalHttpPort": 7001,
+    "LocalHttpPort": 7071,
     "CORS": "*"
   }
 }

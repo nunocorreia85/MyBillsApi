@@ -1,12 +1,12 @@
-﻿using MediatR;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.BankTransactions.Queries;
 using MyBills.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.BankTransactions.Queries
 {

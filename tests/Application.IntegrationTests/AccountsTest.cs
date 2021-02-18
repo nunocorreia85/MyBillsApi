@@ -1,23 +1,22 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Moq;
 using MyBills.Api.Accounts;
+using MyBills.Application.IntegrationTests.Common;
 using MyBills.Application.IntegrationTests.Infrastructure;
 using MyBills.Application.Shared.Accounts.Commands;
 using MyBills.Domain.Entities;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.IntegrationTests
 {
@@ -44,6 +43,10 @@ namespace MyBills.Application.IntegrationTests
             var createAccountFunction = new CreateAccount(_mediatorService);
             var createAccountRequest = new HttpRequestMessage
             {
+                Headers =
+                {
+                    Authorization = HttpRequestMessageUtils.GetAuthorization()
+                },
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
@@ -68,6 +71,10 @@ namespace MyBills.Application.IntegrationTests
             var createAccountFunction = new CreateAccount(_mediatorService);
             var createAccountRequest = new HttpRequestMessage
             {
+                Headers =
+                {
+                    Authorization = HttpRequestMessageUtils.GetAuthorization()
+                },
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
@@ -83,7 +90,7 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                Assert.AreEqual(1, ((OkObjectResult)result).Value);
+                Assert.AreEqual(1, ((OkObjectResult) result).Value);
             });
         }
 
@@ -96,9 +103,12 @@ namespace MyBills.Application.IntegrationTests
             var updateAccountFunction = new UpdateAccount(_mediatorService);
             var updateAccountRequest = new HttpRequestMessage
             {
+                Headers =
+                {
+                    Authorization = HttpRequestMessageUtils.GetAuthorization()
+                },
                 Content = new StringContent(JsonConvert.SerializeObject(new UpdateAccountCommand
                 {
-                    Id = 1,
                     BankAccountNumber = "CH9300762011623852957"
                 }), Encoding.UTF8, "application/json")
             };
@@ -117,10 +127,10 @@ namespace MyBills.Application.IntegrationTests
             // arrange
             var mock = new Mock<ILogger>();
             var getAccounts = new CloseAccounts(_mediatorService);
-            var httpRequest = CreateHttpRequest("id", "1");
+            var httpRequestMessage = HttpRequestMessageUtils.GetHttpRequestMessage();
 
-            // act
-            var result = await getAccounts.Run(httpRequest, mock.Object, CancellationToken.None);
+            // act            
+            var result = await getAccounts.Run(httpRequestMessage, mock.Object, CancellationToken.None);
 
             // assert
             Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
@@ -133,7 +143,7 @@ namespace MyBills.Application.IntegrationTests
             // arrange
             var mock = new Mock<ILogger>();
             var getAccounts = new GetAccounts(_mediatorService);
-            var httpRequest = CreateHttpRequest("id", "1");
+            var httpRequest = new HttpRequestMessage();
 
             // act
             var result = await getAccounts.Run(httpRequest, mock.Object, CancellationToken.None);
@@ -142,8 +152,8 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                var okObjectResult = (OkObjectResult)result;
-                var accounts = (List<Account>)okObjectResult.Value;
+                var okObjectResult = (OkObjectResult) result;
+                var accounts = (List<Account>) okObjectResult.Value;
                 Assert.IsNotNull(accounts);
                 Assert.AreEqual(1, accounts.Count);
                 Assert.AreEqual("CH9300762011623852957", accounts[0].BankAccountNumber);
@@ -160,14 +170,6 @@ namespace MyBills.Application.IntegrationTests
                 {key, value}
             };
             return qs;
-        }
-
-        public static HttpRequest CreateHttpRequest(string queryStringKey, string queryStringValue)
-        {
-            var context = new DefaultHttpContext();
-            var request = context.Request;
-            request.Query = new QueryCollection(CreateDictionary(queryStringKey, queryStringValue));
-            return request;
         }
     }
 }

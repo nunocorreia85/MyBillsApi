@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace MyBills.Api.Common
 {
@@ -11,7 +11,7 @@ namespace MyBills.Api.Common
             where T : IConvertible
         {
             var values = req.Query[queryKeyName];
-            return values.Select(value => (T)Convert.ChangeType(value, typeof(T))).ToList();
+            return values.Select(value => (T) Convert.ChangeType(value, typeof(T))).ToList();
         }
     }
 }

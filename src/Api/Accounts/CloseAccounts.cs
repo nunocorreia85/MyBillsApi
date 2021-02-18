@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -7,8 +10,6 @@ using Microsoft.Extensions.Logging;
 using MyBills.Api.Common;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Shared.Accounts.Commands;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Api.Accounts
 {
@@ -24,14 +25,16 @@ namespace MyBills.Api.Accounts
         [FunctionName("CloseAccounts")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "accounts")]
-            HttpRequest req, ILogger log, CancellationToken token)
+            HttpRequestMessage req, ILogger log, CancellationToken token)
         {
-            var ids = HttpRequestUtils.GetQueryKeyValues<long>(req, "id");
+            var jwtSecurityToken = JwtTokenUtils.GetSecurityToken(req);
+            var objectId = JwtTokenUtils.GetObjectId(jwtSecurityToken);
+
             try
             {
                 await _mediator.Send(new CloseAccountsCommand
                 {
-                    Ids = ids
+                    ExternaId = objectId
                 }, token);
                 return new OkResult();
             }

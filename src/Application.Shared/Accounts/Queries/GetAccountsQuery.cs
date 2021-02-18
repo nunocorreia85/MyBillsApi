@@ -1,7 +1,7 @@
-﻿using MediatR;
-using MyBills.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using MediatR;
+using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Shared.Accounts.Queries
 {

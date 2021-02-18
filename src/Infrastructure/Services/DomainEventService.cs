@@ -1,11 +1,11 @@
-﻿using MediatR;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.Extensions.Logging;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Common.Models;
 using MyBills.Domain.Common;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Infrastructure.Services
 {
@@ -28,7 +28,7 @@ namespace MyBills.Infrastructure.Services
 
         private INotification GetNotificationCorrespondingToDomainEvent(DomainEvent domainEvent)
         {
-            return (INotification)Activator.CreateInstance(
+            return (INotification) Activator.CreateInstance(
                 typeof(DomainEventNotification<>).MakeGenericType(domainEvent.GetType()), domainEvent);
         }
     }

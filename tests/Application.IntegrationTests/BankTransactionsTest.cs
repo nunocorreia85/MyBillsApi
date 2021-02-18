@@ -1,4 +1,10 @@
-﻿using MediatR;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +19,6 @@ using MyBills.Application.Shared.BankTransactions.Commands;
 using MyBills.Domain.Entities;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.IntegrationTests
 {
@@ -91,7 +91,7 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                Assert.AreEqual(1, ((OkObjectResult)result).Value);
+                Assert.AreEqual(1, ((OkObjectResult) result).Value);
             });
         }
 
@@ -153,8 +153,8 @@ namespace MyBills.Application.IntegrationTests
             Assert.Multiple(() =>
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
-                var okObjectResult = (OkObjectResult)result;
-                var bankTransactions = (List<BankTransaction>)okObjectResult.Value;
+                var okObjectResult = (OkObjectResult) result;
+                var bankTransactions = (List<BankTransaction>) okObjectResult.Value;
                 Assert.IsNotNull(bankTransactions);
                 Assert.AreEqual(1, bankTransactions.Count);
                 Assert.AreEqual("Groceries", bankTransactions[0].Memo);

@@ -1,6 +1,6 @@
-﻿using MediatR;
+﻿using System.Collections.Generic;
+using MediatR;
 using MyBills.Domain.Entities;
-using System.Collections.Generic;
 
 namespace MyBills.Application.Shared.TransactionCategories.Queries
 {

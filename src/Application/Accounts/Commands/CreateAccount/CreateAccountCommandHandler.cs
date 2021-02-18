@@ -1,9 +1,9 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.Accounts.Commands;
 using MyBills.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MyBills.Application.Accounts.Commands.CreateAccount
 {
@@ -22,7 +22,11 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
             {
                 ExternalId = request.ExternalId,
                 Balance = request.Balance,
-                BankAccountNumber = request.BankAccountNumber
+                BankAccountNumber = request.BankAccountNumber,
+                Email = request.Email,
+                PostalCode = request.PostalCode,
+                Country = request.Country,
+                City = request.City
             };
 
             await _applicationDbContext.Accounts.AddAsync(entity, cancellationToken);
