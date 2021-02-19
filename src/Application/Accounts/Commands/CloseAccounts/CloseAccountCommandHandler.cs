@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,14 +19,16 @@ namespace MyBills.Application.Accounts.Commands.CloseAccounts
         }
 
         public async Task<Unit> Handle(CloseAccountsCommand request, CancellationToken cancellationToken)
-        {           
-            var entity = await _applicationDbContext.Accounts.FindAsync(request.ExternaId, cancellationToken);
+        {
+            var entity =
+                await _applicationDbContext.Accounts.FirstOrDefaultAsync(account => account.UserId == request.UserId,
+                    cancellationToken);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Account), request.ExternaId);
+                throw new NotFoundException(nameof(Account), request.UserId);
             }
-            
+
             entity.Closed = true;
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

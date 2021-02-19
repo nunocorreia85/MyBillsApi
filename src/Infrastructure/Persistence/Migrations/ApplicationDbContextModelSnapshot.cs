@@ -52,10 +52,6 @@ namespace MyBills.Infrastructure.Persistence.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ExternalId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasMaxLength(200);
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -64,6 +60,10 @@ namespace MyBills.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 

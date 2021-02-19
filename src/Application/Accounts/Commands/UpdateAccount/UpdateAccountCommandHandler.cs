@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using MyBills.Application.Common.Exceptions;
 using MyBills.Application.Common.Interfaces;
 using MyBills.Application.Shared.Accounts.Commands;
@@ -19,12 +20,13 @@ namespace MyBills.Application.Accounts.Commands.UpdateAccount
 
         public async Task<Unit> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
         {
-            var requestIds = new object[] {request.Id};
-            var entity = await _applicationDbContext.Accounts.FindAsync(requestIds, cancellationToken);
+            var entity =
+                await _applicationDbContext.Accounts.FirstOrDefaultAsync(c => c.UserId == request.UserId,
+                    cancellationToken);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Account), requestIds);
+                throw new NotFoundException(nameof(Account), request.UserId);
             }
 
             entity.BankAccountNumber = request.BankAccountNumber;

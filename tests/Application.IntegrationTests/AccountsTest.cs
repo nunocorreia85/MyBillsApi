@@ -28,11 +28,11 @@ namespace MyBills.Application.IntegrationTests
         {
             var testHost = new TestHost();
             _mediatorService = testHost.ServiceProvider.GetRequiredService<IMediator>();
-            externalId = Guid.NewGuid();
+            _userId = new Guid("254e16b6-b254-40f3-a4e1-cd0f76ce4cb7");
         }
 
         private IMediator _mediatorService;
-        private Guid externalId;
+        private Guid _userId;
 
         [Test]
         [Order(1)]
@@ -50,7 +50,6 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
-                    ExternalId = externalId,
                     BankAccountNumber = "123445544"
                 }), Encoding.UTF8, "application/json")
             };
@@ -78,7 +77,7 @@ namespace MyBills.Application.IntegrationTests
                 Content = new StringContent(JsonConvert.SerializeObject(new CreateAccountCommand
                 {
                     Balance = 3,
-                    ExternalId = externalId,
+                    UserId = _userId,
                     BankAccountNumber = "DE89370400440532013000"
                 }), Encoding.UTF8, "application/json")
             };
@@ -126,11 +125,11 @@ namespace MyBills.Application.IntegrationTests
         {
             // arrange
             var mock = new Mock<ILogger>();
-            var getAccounts = new CloseAccounts(_mediatorService);
+            var closeAccount = new CloseAccounts(_mediatorService);
             var httpRequestMessage = HttpRequestMessageUtils.GetHttpRequestMessage();
 
             // act            
-            var result = await getAccounts.Run(httpRequestMessage, mock.Object, CancellationToken.None);
+            var result = await closeAccount.Run(httpRequestMessage, mock.Object, CancellationToken.None);
 
             // assert
             Assert.Multiple(() => { Assert.IsInstanceOf<OkResult>(result); });
@@ -143,10 +142,10 @@ namespace MyBills.Application.IntegrationTests
             // arrange
             var mock = new Mock<ILogger>();
             var getAccounts = new GetAccounts(_mediatorService);
-            var httpRequest = new HttpRequestMessage();
 
             // act
-            var result = await getAccounts.Run(httpRequest, mock.Object, CancellationToken.None);
+            var result = await getAccounts.Run(HttpRequestMessageUtils.GetHttpRequestMessage(), mock.Object,
+                CancellationToken.None);
 
             // assert
             Assert.Multiple(() =>
@@ -159,7 +158,7 @@ namespace MyBills.Application.IntegrationTests
                 Assert.AreEqual("CH9300762011623852957", accounts[0].BankAccountNumber);
                 Assert.AreEqual(3.0M, accounts[0].Balance);
                 Assert.AreEqual(true, accounts[0].Closed);
-                Assert.AreEqual(externalId, accounts[0].ExternalId);
+                Assert.AreEqual(_userId, accounts[0].UserId);
             });
         }
 

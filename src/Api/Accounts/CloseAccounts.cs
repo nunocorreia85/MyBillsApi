@@ -34,7 +34,7 @@ namespace MyBills.Api.Accounts
             {
                 await _mediator.Send(new CloseAccountsCommand
                 {
-                    ExternaId = objectId
+                    UserId = objectId
                 }, token);
                 return new OkResult();
             }

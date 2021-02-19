@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Queries.GetAccounts
 {
-    internal class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, IEnumerable<Account>>
+    internal class GetAccountsQueryHandler : IRequestHandler<GetAccountQuery, IEnumerable<Account>>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -19,20 +20,15 @@ namespace MyBills.Application.Accounts.Queries.GetAccounts
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<Account>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Account>> Handle(GetAccountQuery request, CancellationToken cancellationToken)
         {
             var query = _applicationDbContext.Accounts.AsQueryable();
-            if (request.ExternalIds.Any())
+            if (request.UserId == Guid.Empty)
             {
-                query = query.Where(account => request.ExternalIds.Contains(account.ExternalId));
+                return await query.ToListAsync(cancellationToken);
             }
 
-            if (request.Ids.Any())
-            {
-                query = query.Where(account => request.Ids.Contains(account.Id));
-            }
-
-            return await query.ToListAsync(cancellationToken);
+            return await query.Where(account => account.UserId == request.UserId).ToListAsync(cancellationToken);
         }
     }
 }

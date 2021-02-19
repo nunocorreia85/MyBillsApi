@@ -5,7 +5,7 @@ namespace MyBills.Application.Shared.Accounts.Commands
 {
     public class CreateAccountCommand : IRequest<long>
     {
-        public Guid ExternalId { get; set; }
+        public Guid UserId { get; set; }
 
         public decimal Balance { get; set; }
 

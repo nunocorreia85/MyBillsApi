@@ -34,7 +34,7 @@ namespace MyBills.Application.IntegrationTests
             await _mediatorService.Send(new CreateAccountCommand
             {
                 Balance = 0,
-                ExternalId = Guid.NewGuid(),
+                UserId = Guid.NewGuid(),
                 BankAccountNumber = "DE89370400440532013000"
             });
         }

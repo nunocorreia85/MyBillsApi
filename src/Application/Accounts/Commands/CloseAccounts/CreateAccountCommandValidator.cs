@@ -7,7 +7,7 @@ namespace MyBills.Application.Accounts.Commands.CloseAccounts
     {
         public CloseAccountsCommandValidator()
         {
-            RuleFor(v => v.ExternaId)
+            RuleFor(v => v.UserId)
                 .NotNull()
                 .NotEmpty();
         }

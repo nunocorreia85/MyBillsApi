@@ -19,7 +19,7 @@ namespace MyBills.Infrastructure.Persistence.Migrations
                     CreatedBy = table.Column<string>(nullable: true),
                     LastModified = table.Column<DateTime>(nullable: true),
                     LastModifiedBy = table.Column<string>(nullable: true),
-                    ExternalId = table.Column<Guid>(maxLength: 200, nullable: false),
+                    UserId = table.Column<Guid>(maxLength: 200, nullable: false),
                     Balance = table.Column<decimal>(nullable: false),
                     BankAccountNumber = table.Column<string>(maxLength: 200, nullable: false),
                     Closed = table.Column<bool>(nullable: false)

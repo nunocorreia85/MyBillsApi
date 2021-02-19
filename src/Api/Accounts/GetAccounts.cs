@@ -31,7 +31,7 @@ namespace MyBills.Api.Accounts
             var objectId = JwtTokenUtils.GetObjectId(securityToken);
 
             var accounts = await _mediator.Send(
-                new GetAccountsQuery {ExternalIds = new List<Guid> {objectId}}, token);
+                new GetAccountQuery {UserId = objectId}, token);
             return new OkObjectResult(accounts);
         }
     }

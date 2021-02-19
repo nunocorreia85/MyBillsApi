@@ -30,7 +30,7 @@ namespace MyBills.Api.Accounts
             var objectId = JwtTokenUtils.GetObjectId(securityToken);
 
             var command = await req.Content.ReadAsAsync<CreateAccountCommand>(token);
-            command.ExternalId = objectId;
+            command.UserId = objectId;
             try
             {
                 var id = await _mediator.Send(command, token);

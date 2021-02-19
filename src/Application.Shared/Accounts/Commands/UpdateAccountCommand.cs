@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 
 namespace MyBills.Application.Shared.Accounts.Commands
 {
@@ -6,5 +7,6 @@ namespace MyBills.Application.Shared.Accounts.Commands
     {
         public long Id { get; set; }
         public string BankAccountNumber { get; set; }
+        public Guid UserId { get; set; }
     }
 }
