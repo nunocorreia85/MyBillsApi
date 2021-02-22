@@ -6,7 +6,7 @@
         <RootNamespace>MyBills.Application.Shared</RootNamespace>
         <LangVersion>8</LangVersion>
         <RepositoryUrl>https://github.com/nunocorreia85/MyBillsApi</RepositoryUrl>
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
