@@ -28,7 +28,7 @@ namespace MyBills.Api.Accounts
         {
             var jwtSecurityToken = JwtTokenUtils.GetSecurityToken(req);
             var objectId = JwtTokenUtils.GetObjectId(jwtSecurityToken);
-            
+
             var command = await req.Content.ReadAsAsync<UpdateAccountCommand>(token);
             command.UserId = objectId;
             try

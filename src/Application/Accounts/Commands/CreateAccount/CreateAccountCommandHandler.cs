@@ -21,12 +21,15 @@ namespace MyBills.Application.Accounts.Commands.CreateAccount
             var entity = new Account
             {
                 UserId = request.UserId,
-                Balance = request.Balance,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Address = request.Address,
                 BankAccountNumber = request.BankAccountNumber,
                 Email = request.Email,
                 PostalCode = request.PostalCode,
                 Country = request.Country,
-                City = request.City
+                City = request.City,
+                Balance = request.Balance
             };
 
             await _applicationDbContext.Accounts.AddAsync(entity, cancellationToken);

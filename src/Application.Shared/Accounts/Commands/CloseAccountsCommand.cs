@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using MediatR;
 
 namespace MyBills.Application.Shared.Accounts.Commands

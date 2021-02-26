@@ -30,6 +30,12 @@ namespace MyBills.Application.Accounts.Commands.UpdateAccount
             }
 
             entity.BankAccountNumber = request.BankAccountNumber;
+            entity.FirstName = request.FirstName;
+            entity.LastName = request.LastName;
+            entity.City = request.City;
+            entity.Address = request.Address;
+            entity.Country = request.Country;
+            entity.PostalCode = request.PostalCode;
 
             await _applicationDbContext.SaveChangesAsync(cancellationToken);
 

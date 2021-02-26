@@ -6,6 +6,7 @@
     <RootNamespace>MyBills.Domain</RootNamespace>
     <LangVersion>8</LangVersion>
     <RepositoryUrl>https://github.com/nunocorreia85/MyBillsApi</RepositoryUrl>
+    <PackageVersion>1.0.3</PackageVersion>
   </PropertyGroup>
 
 </Project>
