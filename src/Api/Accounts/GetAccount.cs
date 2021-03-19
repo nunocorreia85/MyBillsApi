@@ -11,11 +11,11 @@ using MyBills.Application.Shared.Accounts.Queries;
 
 namespace MyBills.Api.Accounts
 {
-    public class GetAccounts
+    public class GetAccount
     {
         private readonly IMediator _mediator;
 
-        public GetAccounts(IMediator mediator)
+        public GetAccount(IMediator mediator)
         {
             _mediator = mediator;
         }

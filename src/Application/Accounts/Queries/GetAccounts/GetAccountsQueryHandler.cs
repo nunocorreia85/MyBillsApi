@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +8,7 @@ using MyBills.Domain.Entities;
 
 namespace MyBills.Application.Accounts.Queries.GetAccounts
 {
-    internal class GetAccountsQueryHandler : IRequestHandler<GetAccountQuery, IEnumerable<Account>>
+    internal class GetAccountsQueryHandler : IRequestHandler<GetAccountQuery, Account>
     {
         private readonly IApplicationDbContext _applicationDbContext;
 
@@ -20,15 +17,11 @@ namespace MyBills.Application.Accounts.Queries.GetAccounts
             _applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<Account>> Handle(GetAccountQuery request, CancellationToken cancellationToken)
+        public async Task<Account> Handle(GetAccountQuery request, CancellationToken cancellationToken)
         {
-            var query = _applicationDbContext.Accounts.AsQueryable();
-            if (request.UserId == Guid.Empty)
-            {
-                return await query.ToListAsync(cancellationToken);
-            }
-
-            return await query.Where(account => account.UserId == request.UserId).ToListAsync(cancellationToken);
+            return await _applicationDbContext.Accounts.FirstOrDefaultAsync(
+                act => act.UserId == request.UserId,
+                cancellationToken);
         }
     }
 }

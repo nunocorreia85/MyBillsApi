@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -8,7 +7,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Primitives;
 using Moq;
 using MyBills.Api.Accounts;
 using MyBills.Application.IntegrationTests.Common;
@@ -141,10 +139,10 @@ namespace MyBills.Application.IntegrationTests
         {
             // arrange
             var mock = new Mock<ILogger>();
-            var getAccounts = new GetAccounts(_mediatorService);
+            var getAccount = new GetAccount(_mediatorService);
 
             // act
-            var result = await getAccounts.Run(HttpRequestMessageUtils.GetHttpRequestMessage(), mock.Object,
+            var result = await getAccount.Run(HttpRequestMessageUtils.GetHttpRequestMessage(), mock.Object,
                 CancellationToken.None);
 
             // assert
@@ -152,23 +150,13 @@ namespace MyBills.Application.IntegrationTests
             {
                 Assert.IsInstanceOf<OkObjectResult>(result);
                 var okObjectResult = (OkObjectResult) result;
-                var accounts = (List<Account>) okObjectResult.Value;
-                Assert.IsNotNull(accounts);
-                Assert.AreEqual(1, accounts.Count);
-                Assert.AreEqual("CH9300762011623852957", accounts[0].BankAccountNumber);
-                Assert.AreEqual(3.0M, accounts[0].Balance);
-                Assert.AreEqual(true, accounts[0].Closed);
-                Assert.AreEqual(_userId, accounts[0].UserId);
+                var account = (Account) okObjectResult.Value;
+                Assert.IsNotNull(account);                
+                Assert.AreEqual("CH9300762011623852957", account.BankAccountNumber);
+                Assert.AreEqual(3.0M, account.Balance);
+                Assert.AreEqual(true, account.Closed);
+                Assert.AreEqual(_userId, account.UserId);                
             });
-        }
-
-        private static Dictionary<string, StringValues> CreateDictionary(string key, string value)
-        {
-            var qs = new Dictionary<string, StringValues>
-            {
-                {key, value}
-            };
-            return qs;
         }
     }
 }
